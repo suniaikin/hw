@@ -6,13 +6,21 @@
     margin: 0;
 }
 
-section {
-    height: 400px;
+html {
+    font-size: 12px;
 }
 
-.square {
+body {
     font-size: 10px;
-    width: 10em;
-    background-color: blueviolet;
-    height: 50%;
 }
+
+section {
+    height: 400px;
+    font-size: 20px;
+    }
+
+.square {
+    width: 100vw;
+    height: 50vh;
+    background-color: blueviolet;
+    }
