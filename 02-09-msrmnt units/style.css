@@ -1,0 +1,18 @@
+* ,
+*::after,
+*::before {
+    box-sizing: border-box; 
+    padding: 0; 
+    margin: 0;
+}
+
+section {
+    height: 400px;
+}
+
+.square {
+    font-size: 10px;
+    width: 10em;
+    background-color: blueviolet;
+    height: 50%;
+}
