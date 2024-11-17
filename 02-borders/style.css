@@ -1,0 +1,26 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+}
+
+.win {
+    height: 300px;
+    width: 200px;
+    background-color: rgb(228, 210, 223);
+    border-radius: 160px 160px 0 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    
+}
+
+.win-1 {
+    height: 270px;
+    width: 150px;
+    background-color: rgb(184, 17, 134);
+    border-radius: 160px 160px 0 0;
+}
+
