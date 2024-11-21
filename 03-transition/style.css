@@ -1,0 +1,25 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.parent {
+    height: 500px;
+    width: 800px;
+    background-color: rgb(146, 178, 226);
+    padding: 20px;
+}
+
+.child {
+    height: 150px;
+    width: 200px;
+    background-color: rgb(65, 65, 210);
+    color: #fff;
+    transition: 2s;
+}
+
+.parent:hover .child {
+    display: none;
+}
