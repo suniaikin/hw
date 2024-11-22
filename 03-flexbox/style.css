@@ -1,0 +1,62 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.flexcontainer {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+
+.myDiv {
+    background-color: rgb(252, 248, 0);
+    flex-basis: 300px;
+    flex-shrink: 1 2 300px;
+
+
+}
+
+.myText {
+    background-color: rgb(132, 165, 42);
+    max-width: 500px;
+    flex-shrink: 5;
+}
+
+.mySpan {
+    background-color: aquamarine;
+
+}
+
+.myImg {
+    height: 150px;
+}
+
+
+
+.wrapper {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
+header {
+    background-color: rgb(246, 246, 246);
+    height: 100px;
+}
+
+main {
+    background-color: rgb(10, 36, 234);
+
+}
+
+footer {
+    background-color: rgb(255, 0, 0);
+    height: 50px;
+}
