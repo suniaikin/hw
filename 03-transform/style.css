@@ -1,0 +1,33 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+    color: rgb(249, 249, 242);
+}
+
+.elem-transform {
+    width: 350px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #52dd0d;
+    /* transform: translate(-200px, -150px) */
+    transition: 0.2s;
+}
+
+.elem-transform:hover {
+    transform: matrix(1.5, 2.0, );
+    transform-origin: center;
+}
+
+
+.elem {
+    width: 350px;
+    height: 350px;
+    background-color: #ec1e7b;
+}
