@@ -8,6 +8,8 @@ body {
     font-weight: bold;
     margin: 0;
     color: white;
+    min-width: 360px;
+
 }
 
 section {
@@ -69,7 +71,7 @@ section {
 
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 992px), (orientation: landscape) {
 
     section {
 
