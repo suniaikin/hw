@@ -1,0 +1,1 @@
+let energy = 10 
