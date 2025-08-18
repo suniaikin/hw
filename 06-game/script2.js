@@ -19,4 +19,18 @@ while (!isWinner) {
 			computerChoice = 'бумага'
 			break
 	}
+
+	if (userChoice === computerChoice) {
+		alert('Ничья, играем ещё раз!')
+	} else {
+		const isUserWinner =
+			(userChoice === 'камень' && computerChoice === 'ножницы') ||
+			(userChoice === 'ножницы' && computerChoice === 'бумага') ||
+			(userChoice === 'бумага' && computerChoice === 'камень')
+
+		const message = isUserWinner ? 'Ты победил!' : 'Ты проиграл!'
+		alert(message)
+
+		isWinner = true
+	}
 }
