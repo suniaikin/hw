@@ -36,16 +36,12 @@ const favoriteBooks = [
   },
 ]
 
-// Напишем функцию, которая принимает массив книг и выводит в консоль их авторов.
-// Function declaration
-
-function printBookAuthors(books) {
+// Function expression
+const printBookAuthors = function(books) {
 	for (let i = 0; i < books.length; i++) {
-		const book = books[i]
-		console.log(book.author)
-
+		const book = books[i];
+		console.log(book.author);
 	}
 }
 
 printBookAuthors(favoriteBooks)
-
