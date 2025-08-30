@@ -41,3 +41,21 @@ const favoriteBooks = [
   },
 ]
 
+const processBooks =  (books, callback) => {
+  for (let i = 0; i < books.length; i++) {
+    callback(books[i])
+  }
+}
+
+const logAuthor = (books) => {
+  console.log(books.author)
+}
+
+const logCheapBooks = (books) => {
+  if (books.price <= 30) {
+    console.log(`${books.title} - ${books.price}`)
+  }
+}
+
+processBooks(favoriteBooks, logAuthor) // Выводит авторов всех книг
+processBooks(favoriteBooks, logCheapBooks) // Выводит названия и цены дешёвых книг
