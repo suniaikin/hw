@@ -41,6 +41,13 @@ const favoriteBooks = [
   },
 ]
 
+const printCheapBooks  = (books) => {
+	for (let i = 0; i < books.length; i++) {
+		if (books[i]["price"] <= 30) {
+			console.log(`Price of ${books[i]["title"]} is ${books[i]["price"]}`)
+		}
+	}
+}
 
 
 
