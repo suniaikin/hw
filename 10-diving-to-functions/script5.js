@@ -49,3 +49,13 @@ const printCheapBooks  = (books) => {
 	}
 }
 printCheapBooks(favoriteBooks)
+
+const printCheapBooks2 = (books) => {
+  for (const book of books) {
+    if (book.price <= 30) {
+      console.log(`Цена "${book.title}" составляет ${book.price}`);
+    }
+  }
+};
+
+printCheapBooks2(favoriteBooks)
