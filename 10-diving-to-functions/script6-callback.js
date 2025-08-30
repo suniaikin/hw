@@ -47,13 +47,13 @@ const processBooks =  (books, callback) => {
   }
 }
 
-const logAuthor = (books) => {
-  console.log(books.author)
+const logAuthor = (book) => {
+  console.log(book.author)
 }
 
-const logCheapBooks = (books) => {
-  if (books.price <= 30) {
-    console.log(`${books.title} - ${books.price}`)
+const logCheapBooks = (book) => {
+  if (book.price <= 30) {
+    console.log(`${book.title} - ${book.price}`)
   }
 }
 
