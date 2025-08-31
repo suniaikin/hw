@@ -36,24 +36,24 @@ const favoriteBooks = [
   },
 ]
 
-const printAuthors = (books) => {
+const getAuthors = (books) => {
 	let authorsArray = [];
 	for (let book of books) {
 		authorsArray.push(book.author);
 	} return authorsArray
 }
 
-const authors = printAuthors(favoriteBooks);
+const authors = getAuthors(favoriteBooks);
 console.log(authors);
 
 
-const printTitles = (books) => {
+const getTitles = (books) => {
 	let titlesArray = [];
 	for (let book of books) {
       titlesArray.push(book.title);
     } return titlesArray;
 }
 
-const titles = printTitles(favoriteBooks);
+const titles = getTitles(favoriteBooks);
 console.log(titles);
 
