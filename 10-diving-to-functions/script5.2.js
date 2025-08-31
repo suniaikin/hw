@@ -37,20 +37,10 @@ const favoriteBooks = [
 ]
 
 const printAuthors = (books) => {
-	console.log(books.author)
+	let authorsArray = [];
+	for (let book of books) {
+		authorsArray.push(book.author);
+	} return console.log(authorsArray)
 }
-
-const printTitles = (books) => {
-  console.log(books.title)
-}
-
-const printBooks = (books, callback1, callback2) => {
-  for (const book of books) {
-    callback1(book)
-    callback2(book)
-  }
-}
-
-
-printBooks(favoriteBooks, printAuthors, printTitles)
+printAuthors(favoriteBooks);
 
