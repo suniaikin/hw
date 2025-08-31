@@ -40,7 +40,19 @@ const printAuthors = (books) => {
 	let authorsArray = [];
 	for (let book of books) {
 		authorsArray.push(book.author);
-	} return console.log(authorsArray)
+	} return authorsArray
 }
-printAuthors(favoriteBooks);
+
+const authors = printAuthors(favoriteBooks);
+
+
+const printTitles = (books) => {
+	let titlesArray = [];
+	for (let book of books) {
+      titlesArray.push(book.title);
+    } return console.log(titlesArray);
+}
+
+
+printTitles(favoriteBooks);
 
