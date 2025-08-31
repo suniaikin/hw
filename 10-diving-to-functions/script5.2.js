@@ -48,12 +48,21 @@ console.log(authors);
 
 
 const getTitles = (books) => {
-	let titlesArray = [];
-	for (let book of books) {
-      titlesArray.push(book.title);
-    } return titlesArray;
+  let titlesArray = []
+  books.forEach((book) => {
+    titlesArray.push(book.title)
+  } )
+	return titlesArray
 }
 
 const titles = getTitles(favoriteBooks);
 console.log(titles);
 
+
+
+/*const getTitles = (books) => {
+  let titlesArray = [];
+  for (let book of books) {
+      titlesArray.push(book.title);
+    } return titlesArray;
+}*/
