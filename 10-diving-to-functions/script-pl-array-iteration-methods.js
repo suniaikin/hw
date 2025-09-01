@@ -36,7 +36,7 @@ const favoriteBooks = [
   },
 ]
 
-const logAuthor = (book) => {
+/*const logAuthor = (book) => {
   console.log(book.author)
 }
 
@@ -47,6 +47,8 @@ const logCheapBooks = (book) => {
 }
 
 favoriteBooks.forEach(logAuthor)
-favoriteBooks.forEach(logCheapBooks)
+favoriteBooks.forEach(logCheapBooks)*/
   
-  
+favoriteBooks.forEach((book) => {
+  console.log(book.author)
+})
