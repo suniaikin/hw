@@ -36,6 +36,7 @@ const favoriteBooks = [
   },
 ]
 
+/*
 const getAuthors = (books) => {
 	let authorsArray = [];
 	for (let book of books) {
@@ -57,12 +58,13 @@ const getTitles = (books) => {
 
 const titles = getTitles(favoriteBooks);
 console.log(titles);
+*/
 
 
+const getValuesFrom = (array, propertyName) => {
+  const newArray = array.map((item) => {
+    return item[propertyName];
+  })
+  return newArray
+}
 
-/*const getTitles = (books) => {
-  let titlesArray = [];
-  for (let book of books) {
-      titlesArray.push(book.title);
-    } return titlesArray;
-}*/
