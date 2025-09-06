@@ -62,10 +62,7 @@ console.log(titles);
 
 
 const getValuesFrom = (array, propertyName) => {
-  const newArray = array.map((item) => {
-    return item[propertyName];
-  })
-  return newArray
+  return array.map((item) => item[propertyName])
 }
 
 let out = getValuesFrom(favoriteBooks, 'author')
