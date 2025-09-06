@@ -68,3 +68,6 @@ const getValuesFrom = (array, propertyName) => {
   return newArray
 }
 
+let out = getValuesFrom(favoriteBooks, 'author')
+
+console.log(out);
