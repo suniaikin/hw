@@ -10,3 +10,9 @@
 //Create new element
 const neElement = document.createElement('div')
 
+//Add an element to the page
+document.body.append(neElement)
+
+
+
+
