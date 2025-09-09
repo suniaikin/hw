@@ -7,11 +7,23 @@
 // const list = document.querySelector('.list')
 // list.prepend(listItem)
 
+
+
 //Create new element
-const neElement = document.createElement('div')
+const newElement = document.createElement('div')
 
 //Add an element to the page
-document.body.append(neElement)
+document.body.append(newElement)
+
+//Add text
+newElement.textContent = 'New Element Text'
+
+//Change text
+newElement.textContent = 'Super New Element Text'
+
+newElement.innerHTML = 'Absolutely New Element Text'
+
+
 
 //Search for an element on the page
 const titleElement = document.getElementById('id-элемента')
@@ -19,11 +31,10 @@ const titleElement = document.getElementById('id-элемента')
 //Search for an element on the page by class
 const header = document.getElementsByTagName("h1")
 
-//Search for an element on the page
-const listItem = document.querySelector('.list .current') //first element
+//Search by selector (gets the first only)
+const listItem = document.querySelector('.list .current')
 
 //Search for all elements on the page
 const listItems = document.querySelectorAll('ol .item') //all elements
-console.log(listItems) //NodeList
 
 
