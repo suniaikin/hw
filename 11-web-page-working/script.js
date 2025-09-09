@@ -23,6 +23,12 @@ newElement.textContent = 'Super New Element Text'
 
 newElement.innerHTML = 'Absolutely New Element Text'
 
+const listItemText = 'InnerHTML'
+
+// list.innerHTML = list.innerHTML + `<li class="item">${listItemText}</li>`
+// console.log(list.innerHTML)
+
+newElement.style.backgroundColor = 'red'
 
 
 //Search for an element on the page
