@@ -7,7 +7,7 @@
 // const list = document.querySelector('.list')
 // list.prepend(listItem)
 
-
+const list = document.querySelector('.list');
 
 //Create new element
 const newElement = document.createElement('div')
@@ -42,5 +42,14 @@ const listItem = document.querySelector('.list .current')
 
 //Search for all elements on the page
 const listItems = document.querySelectorAll('ol .item') //all elements
+
+const button = document.querySelector('#color-button');
+
+button.addEventListener('click', function () {
+    const listItem = document.createElement('li')
+    listItem.classList.add('item')
+    listItem.textContent = "Новая луна апреля"
+    list.append(listItem)
+})
 
 
