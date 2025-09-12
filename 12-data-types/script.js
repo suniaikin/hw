@@ -10,7 +10,7 @@ const model = {
         ]
     },
 
-    render() {
+    display () {
         // 1. Remove previous view
         console.clear()
         // 2. Create new view
@@ -21,16 +21,22 @@ const model = {
         // 1. Change data
         this.courseData.lessons = this.courseData.lessons.filter(lesson => lesson.id !== lessonId);
         // 2. Update view
-        this.render()
+        this.display()
     },
 
-    createLesson() {
+    createLesson(lessonTitle) {
         // 1. Change data
-/*
-        const newLesson = {}
-*/
+        const newLesson = {
+            id: 6,
+            title: lessonTitle,
+            isDone: false
+        }
+
+
+
+
         // 2. Update view
-        this.render()
+        this.display()
     }
 
 
@@ -38,4 +44,4 @@ const model = {
     //deleteLesson(){}
 }
 
-model.render()
+model.display()
