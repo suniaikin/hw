@@ -32,7 +32,7 @@ const model = {
             isDone: false
         }
 
-
+        this.courseData.lessons = [...this.courseData.lessons, newLesson]
 
 
         // 2. Update view
