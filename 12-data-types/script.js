@@ -33,8 +33,6 @@ const model = {
         }
 
         this.courseData.lessons = [...this.courseData.lessons, newLesson]
-
-
         // 2. Update view
         this.display()
     }
