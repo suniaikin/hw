@@ -43,22 +43,3 @@ const model = {
 }
 
 model.display()
-
-
-Конечно, вот код из вашего изображения:
-
-JavaScript
-
-// чтение свойства объекта
-console.log(car.brend);
-console.log(car["brend"]);
-console.log(car.engine.type);
-console.log(car.engine);
-console.log(car.prev_owners);
-console.log(car.prev_owners[0]);
-
-// создание нового свойства (инициализация свойства значением)
-car.lastPrice = 14500
-
-// изменение значения свойства (переприсваивание)
-car.millage = 250000
