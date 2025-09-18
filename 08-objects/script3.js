@@ -1,7 +1,5 @@
-// Объекты с "поведением"
-
-const pet = {
-    name: 'Strider',
+const begemot = {
+    name: 'Begemot',
     happiness: 50,
     hunger: 50, // голод
     sayHi: function () {
@@ -10,7 +8,7 @@ const pet = {
     checkStatus: function () {
         console.log(`Счастье: ${pet.happiness}, голод: ${pet.hunger}`)
     },
-      feedPet: function (foodQuantity) {
+    feedPet: function (foodQuantity) {
         pet.hunger = pet.hunger - foodQuantity
         if (pet.hunger < 0) {
             pet.hunger = 0
@@ -25,13 +23,3 @@ const pet = {
         console.log('Питомец стал счастливее!')
     }
 }
-
-pet.sayHi()
-pet.checkStatus()
-pet.feedPet(30)
-pet.checkStatus()
-pet.feedPet(20)
-pet.checkStatus()
-pet.playWithPet()
-pet.checkStatus()
-
