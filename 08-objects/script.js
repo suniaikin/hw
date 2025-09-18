@@ -53,3 +53,4 @@ for (const key in car) {
 //все "вхождения"
 const entries = Object.entries(car.engine)
 console.log(entries);
+
