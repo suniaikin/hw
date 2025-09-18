@@ -43,3 +43,13 @@ console.log(keys);
 // все значения объекта
 const engine = Object.values(car.engine)
 console.log(engine);
+
+
+//обход объекта
+for (const key in car) {
+    console.log(car[key]);
+}
+
+//все "вхождения"
+const entries = Object.entries(car.engine)
+console.log(entries);
