@@ -70,3 +70,25 @@ const cheapBooks = (books) => {
 }
 
 cheapBooks(favoriteBooks)
+
+
+const processBooks = (books, callback) => {
+    for (let i = 0; i < books.length; i++) {
+        const book = books[i]
+        callback(book)
+    }
+}
+
+// const logBooksAuthors = (book) => {
+//     console.log(book.author)
+// }
+
+processBooks(favoriteBooks, logBooksAuthors)
+
+const logCheapBooks = (book) => {
+    if (book.price < 30) {
+        console.log(`${book.title} - ${book.price}`)
+    }       
+}
+
+favoriteBooks.forEach((book) => console.log(book.author))
