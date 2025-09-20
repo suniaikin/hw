@@ -31,15 +31,21 @@ const model = {
 			title: lessonTitle,
 			isDone: false
 		}
-
 		this.courseData.lessons = [...this.courseData.lessons, newLesson]
+		// 2. Update view
+		this.display()
+	},
+
+	updateLessonStatus(lessonId) {
+		// 1. Change data
+		// const lesson = this.courseData.lessons.find(lesson => lesson.id === lessonId);
+		// lesson.isDone = !lesson.isDone;
+		this.courseData.lessons = this.courseData.lessons.map(lesson => lesson.id === lessonId ? { ...lesson, isDone: !lesson.isDone } : lesson);
+
 		// 2. Update view
 		this.display()
 	}
 
-
-	//updateLessonStatus(){}
-	//deleteLesson(){}
 }
 
 model.display()
