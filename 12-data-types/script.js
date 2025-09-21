@@ -12,11 +12,9 @@ const model = {
 
 	display() {
 		// 1. Remove previous view
-		console.clear()
+		document.body.innerHTML = '';
 
 		// 2. Create new view
-		// console.log(this.courseData);
-
 		const view = courseView(this.courseData);
 
 		// 3. Show new view
