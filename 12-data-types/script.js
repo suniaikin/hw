@@ -13,8 +13,15 @@ const model = {
 	display() {
 		// 1. Remove previous view
 		console.clear()
+
 		// 2. Create new view
-		console.log(this.courseData);
+		// console.log(this.courseData);
+
+		const view = courseView(this.courseData);
+
+		// 3. Show new view
+		document.body.append(view)
+
 	},
 
 	deleteLesson(lessonId) {
@@ -49,3 +56,39 @@ const model = {
 }
 
 model.display()
+
+function courseView(data) {
+	// обертка для представления данных
+	const container = document.createElement('div');
+
+	// заголовок
+	const listTitle = document.createElement('h1');
+	listTitle.classList.add('title');
+	listTitle.setAttribute('id', 'course-title');
+	listTitle.textContent = data.title;
+
+	// список 
+	const list = document.createElement('ol');
+	const lessons = data.lessons;
+
+	// элементы списка
+	for (let i = 0; i < lessons.length; i++) {
+		const lesson = document.createElement('li');
+		lesson.classList.add('item');
+		lesson.textContent = lessons[i].title;
+		if (lessons[i].isDone) {
+			lesson.classList.add('done');
+		}
+		list.append(lesson);
+	}
+
+
+
+	container.append(listTitle);
+	container.append(list);
+	return container
+
+
+
+
+}
