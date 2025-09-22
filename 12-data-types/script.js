@@ -12,7 +12,7 @@ const model = {
 
 	display() {
 		// 1. Remove previous view
-		document.body.innerHTML = '';
+		document.body.querySelector('div')?.remove();
 
 		// 2. Create new view
 		const view = courseView(this.courseData);
@@ -67,6 +67,7 @@ function courseView(data) {
 
 	// список 
 	const list = document.createElement('ol');
+	list.classList.add('list');
 	const lessons = data.lessons;
 
 	// элементы списка
@@ -77,10 +78,24 @@ function courseView(data) {
 		if (lessons[i].isDone) {
 			lesson.classList.add('done');
 		}
+		// кнопка удаления
+		const deleteButton = document.createElement('button');
+		deleteButton.classList.add('button', 'delete-button');
+		deleteButton.textContent = '✖';
+		deleteButton.addEventListener('click', () => model.deleteLesson(lessons[i].id));
+
+		// кнопка статуса
+		const statusButton = document.createElement('button');
+		statusButton.classList.add('button', 'status-button');
+		statusButton.textContent = lessons[i].isDone ? '❎' : '✅';
+		statusButton.addEventListener('click', () => model.updateLessonStatus(lessons[i].id));
+		lesson.append(statusButton);
+
+
+		// публикаторы кнопок
 		list.append(lesson);
+		lesson.append(deleteButton);
 	}
-
-
 
 	container.append(listTitle);
 	container.append(list);
