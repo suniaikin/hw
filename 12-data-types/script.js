@@ -2,8 +2,8 @@ const model = {
 	courseData: {
 		title: "Содержание курса",
 		lessons: [
-			{ id: 1, title: "Введение в JavaScript", isDone: true },
-			{ id: 2, title: "Операторы, сравнение, ветвление", isDone: true },
+			{ id: 1, title: "Введение в JavaScript", isDone: false },
+			{ id: 2, title: "Операторы, сравнение, ветвление", isDone: false },
 			{ id: 3, title: "Функции", isDone: false },
 			{ id: 4, title: "Массивы", isDone: false },
 			{ id: 5, title: "Объекты", isDone: false }
@@ -32,7 +32,7 @@ const model = {
 	createLesson(lessonTitle) {
 		// 1. Change data
 		const newLesson = {
-			id: 6,
+			id: maxId + 1,
 			title: lessonTitle,
 			isDone: false
 		}
@@ -65,43 +65,33 @@ function courseView(data) {
 	listTitle.setAttribute('id', 'course-title');
 	listTitle.textContent = data.title;
 
-	// список 
 	const list = document.createElement('ol');
 	list.classList.add('list');
 	const lessons = data.lessons;
 
-	// элементы списка
 	for (let i = 0; i < lessons.length; i++) {
-		const lesson = document.createElement('li');
-		lesson.classList.add('item');
-		lesson.textContent = lessons[i].title;
-		if (lessons[i].isDone) {
-			lesson.classList.add('done');
-		}
-		// кнопка удаления
-		const deleteButton = document.createElement('button');
-		deleteButton.classList.add('button', 'delete-button');
-		deleteButton.textContent = '✖';
-		deleteButton.addEventListener('click', () => model.deleteLesson(lessons[i].id));
+		const lesson = lessons[i]
 
-		// кнопка статуса
-		const statusButton = document.createElement('button');
-		statusButton.classList.add('button', 'status-button');
-		statusButton.textContent = lessons[i].isDone ? '❎' : '✅';
-		statusButton.addEventListener('click', () => model.updateLessonStatus(lessons[i].id));
-		lesson.append(statusButton);
+		const listItem = document.createElement('li');
+		listItem.classList.add('list-item')
+
+		const lessonTitle = document.createElement('span');
+		lessonTitle.classList.add('lesson-title');
+		lessonTitle.textContent = lesson.title;
+		if (lesson.isDone) {
+			lessonTitle.classList.add('done');
+		};
 
 
-		// публикаторы кнопок
-		list.append(lesson);
-		lesson.append(deleteButton);
+
+		listItem.append(lessonTitle, doneButton, deleteButton);
+		list.append(listItem);
+
+
 	}
+	container.append(listTitle, list);
 
-	container.append(listTitle);
-	container.append(list);
-	return container
-
-
+	return container;
 
 
 }

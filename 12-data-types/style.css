@@ -1,32 +1,112 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: black;
-    color: white;
+    font: 1.2em "Courier New", Courier, monospace;
+    font-weight: 600;
     padding: 20px;
+    color: #222222;
 }
 
-h1 {
-    font-size: 20px;
+.input {
+    flex-grow: 0.5;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #202020;
+    border-radius: 4px;
+    font-family: "Courier New", Courier, monospace;
 }
-
 .list {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 10px;
+    list-style-type: none;
+    padding: 0;
 }
 
-.item {
-    font-family: Arial, sans-serif;
+.list-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.list-item {
+    margin-bottom: 15px;
+}
+.lesson-title {
+    margin: 0px 15px;
+}
+.done {
+    text-decoration: line-through;
+    color: rgb(195, 195, 195);
+}
+.button {
+    margin-left: 5px;
     cursor: pointer;
 }
 
-.done {
-    font-weight: 600; /* Делает текст более жирным, подчеркивая статус "пройдено" */
+.course-container {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
 }
 
-.done::after {
-    content: "✅"; /* Добавляет знак галочки после текста элемента */
-    font-size: 13px;
-    margin-left: 5px;
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 10px;
+    border: #363636 solid 1px;
+    border-radius: 6px;
+}
+
+.lesson-title {
+    margin: 0 auto;
+    flex-grow: 1;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.button {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: 1px solid #202020;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #090909;
+}
+
+.done-button:hover {
+    color: rgb(255, 255, 255);
+    border: 1px solid green;
+    background-color: green;
+}
+
+.completed {
+    background-color: green;
+    color: white;
+    border: 1px solid green;
+}
+
+.delete-button:hover {
+    color: rgb(255, 255, 255);
+    border: 1px solid red;
+    background-color: red;
+}
+
+.add-form {
+    margin: 10px 0px;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.add-button {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: 1px solid #202020;
+    border-radius: 4px;
 }
