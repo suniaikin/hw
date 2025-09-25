@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>DOM</title>
+    </head>
+    <style>
+        .lesson-list-new {
+            background-color: chocolate;
+            border: 2px solid gray;
+            border-radius: 5px;
+        }
+
+        .header-class {
+            border: 2px solid gray;
+            border-radius: 3px;
+            background-color: blueviolet;
+            font-size: 50px;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #000;
+            color: #fff;
+        }
+    </style>
+
+    <body>
+        <div id="root"></div>
+        <h1 id="course-title" class="title">Содержание курса 📚</h1>
+        <ol class="list">
+            <li class="item">Введение в JavaScript</li>
+            <li class="item">Операторы, сравнение, ветвление</li>
+            <li class="item">Функции</li>
+            <li class="item">Массивы</li>
+            <li class="item">Объекты</li>
+            <li class="item current" id="dom">Взаимодействие с DOM ⬅</li>
+            <li class="item">Типы данных</li>
+            <li class="item">Асинхронное программирование</li>
+            <li class="item">Продвинутая работа с функциями</li>
+            <li class="item">Паттерн MVC</li>
+        </ol>
+        <button id="color-button">Добавить урок</button>
+        <img id="image" />
+        <script src="script.js"></script>
+    </body>
+</html>
