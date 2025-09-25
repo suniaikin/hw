@@ -1,4 +1,5 @@
 const model = {
+	// 1. Методы display, deleteLesson и т.д. должны быть внутри объекта model
 	courseData: {
 		title: "Содержание курса",
 		lessons: [
@@ -7,10 +8,11 @@ const model = {
 			{ id: 3, title: "Функции", isDone: false },
 			{ id: 4, title: "Массивы", isDone: false },
 			{ id: 5, title: "Объекты", isDone: false }
-		]
+		].map((lesson, index) => ({ ...lesson, originalIndex: index })) // Добавляем исходный индекс для сортировки
 	},
 
 	display() {
+		// Удаляем старое отображение перед отрисовкой нового
 		document.body.querySelector('.course-container')?.remove();
 		const view = courseView(this.courseData, this);
 		document.body.append(view);
@@ -22,24 +24,45 @@ const model = {
 	},
 
 	createLesson(lessonTitle) {
-		if (!lessonTitle.trim()) return;
-		const maxId = this.courseData.lessons.reduce((max, lesson) => lesson.id > max ? lesson.id : max, 0);
+		const trimmedTitle = lessonTitle.trim();
+		if (!trimmedTitle) return; // Проверка на пустую строку
+
+		// Находим максимальный ID, чтобы избежать дублирования при удалении элементов
+		const maxId = this.courseData.lessons.reduce((max, lesson) => Math.max(lesson.id, max), 0);
+
 		const newLesson = {
 			id: maxId + 1,
-			title: lessonTitle,
-			isDone: false
+			title: trimmedTitle,
+			isDone: false,
+			originalIndex: this.courseData.lessons.length // Сохраняем исходную позицию
 		};
-		this.courseData.lessons = [...this.courseData.lessons, newLesson];
+
+		this.courseData.lessons.push(newLesson);
 		this.display();
 	},
 
+	// 2. Улучшена и упрощена логика обновления статуса
 	updateLessonStatus(lessonId) {
-		this.courseData.lessons = this.courseData.lessons.map(lesson =>
-			lesson.id === lessonId ? { ...lesson, isDone: !lesson.isDone } : lesson
-		);
+		const lessons = this.courseData.lessons;
+		const lesson = lessons.find(lesson => lesson.id === lessonId);
+
+		if (lesson) {
+			lesson.isDone = !lesson.isDone;
+		}
+
+		// Сортируем массив: сначала невыполненные, потом выполненные.
+		// Внутри каждой группы сохраняем исходный порядок.
+		lessons.sort((a, b) => {
+			if (a.isDone !== b.isDone) {
+				return a.isDone - b.isDone; // false (0) будет раньше true (1)
+			}
+			return a.originalIndex - b.originalIndex; // Сохраняем исходный порядок
+		});
+
 		this.display();
 	}
 };
+
 
 function courseView(data, controller) {
 	const container = document.createElement('div');
@@ -59,6 +82,7 @@ function courseView(data, controller) {
 		const lessonTitle = document.createElement('span');
 		lessonTitle.classList.add('lesson-title');
 		lessonTitle.textContent = lesson.title;
+		// 3. Упрощено добавление класса
 		if (lesson.isDone) {
 			lessonTitle.classList.add('done');
 		}
@@ -66,8 +90,9 @@ function courseView(data, controller) {
 		const doneButton = document.createElement('button');
 		doneButton.classList.add('button', 'done-button');
 		doneButton.dataset.id = lesson.id;
-		doneButton.textContent = lesson.isDone ? 'v' : '_';
-		if (doneButton.textContent === 'v') {
+		doneButton.textContent = lesson.isDone ? '✔' : '_'; // Используем галочку для наглядности
+		// 3. Упрощено добавление класса
+		if (lesson.isDone) {
 			doneButton.classList.add('completed');
 		}
 		doneButton.addEventListener('click', (e) => {
@@ -78,14 +103,11 @@ function courseView(data, controller) {
 		const deleteButton = document.createElement('button');
 		deleteButton.classList.add('button', 'delete-button');
 		deleteButton.dataset.id = lesson.id;
-		deleteButton.textContent = 'x';
+		deleteButton.textContent = '✖'; // Используем крестик для наглядности
 		deleteButton.addEventListener('click', (e) => {
 			const lessonId = Number(e.target.dataset.id);
 			controller.deleteLesson(lessonId);
 		});
-
-		// listItem.append(doneButton, deleteButton, lessonTitle,);
-		// list.append(listItem);
 
 		const buttonGroup = document.createElement('div');
 		buttonGroup.classList.add('button-group');
@@ -119,4 +141,5 @@ function courseView(data, controller) {
 	return container;
 }
 
+// Первый вызов для отрисовки интерфейса
 model.display();
