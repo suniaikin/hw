@@ -7,6 +7,12 @@ const model = {
 	]
 };
 
+deleteTask(id) {
+	// Мы создаём новый массив, в который попадают все задачи,
+	// КРОМЕ той, у которой id совпадает с тем, что мы хотим удалить.
+	this.tasks = this.tasks.filter(task => task.id !== id);
+}
+
 // View
 const view = {
 	list: document.querySelector('.list'),
@@ -27,9 +33,9 @@ const view = {
 // Controller
 
 const controller = {
-    init() {
-        view.renderTasks(model.tasks);
-    }
+	init() {
+		view.renderTasks(model.tasks);
+	}
 };
 
 controller.init();
