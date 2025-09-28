@@ -25,19 +25,17 @@ const model = {
 
 	createLesson(lessonTitle) {
 		const trimmedTitle = lessonTitle.trim();
-		if (!trimmedTitle) return; // Проверка на пустую строку
-
-		// Находим максимальный ID, чтобы избежать дублирования при удалении элементов
+		if (!trimmedTitle) return;
 		const maxId = this.courseData.lessons.reduce((max, lesson) => Math.max(lesson.id, max), 0);
 
 		const newLesson = {
 			id: maxId + 1,
 			title: trimmedTitle,
 			isDone: false,
-			originalIndex: this.courseData.lessons.length // Сохраняем исходную позицию
+			originalIndex: this.courseData.lessons.length // 
 		};
 
-		this.courseData.lessons.push(newLesson);
+		this.courseData.lessons.unshift(newLesson);
 		this.display();
 	},
 

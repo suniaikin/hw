@@ -39,7 +39,7 @@ body {
 }
 
 .add-form input {
-    flex-grow: 1; /* Поле ввода занимает всё свободное место */
+    flex-grow: 1;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
