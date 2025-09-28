@@ -26,7 +26,7 @@ const view = {
 
 			const li = document.createElement('li');
 
-			li.id = task.id;
+			li.dataset.id = task.id;
 
 			const titleElement = document.createElement('span');
 			titleElement.textContent = task.title;
@@ -34,8 +34,10 @@ const view = {
 			const deleteButton = document.createElement('button');
 			deleteButton.textContent = 'Удалить';
 
-			deleteButton.addEventListener('click', () => {
-				controller.handleDeleteTask(task.id);
+			deleteButton.addEventListener('click', (event) => {
+				const li = event.target.closest('li');
+				const idToDelete = Number(li.dataset.id);
+				controller.handleDeleteTask(idToDelete);
 			});
 
 			if (task.isDone) {
