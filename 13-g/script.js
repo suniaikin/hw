@@ -8,15 +8,35 @@ const model = {
 
 	deleteTask(id) {
 		this.tasks = this.tasks.filter(task => task.id !== id);
+	},
+
+	addTask(title) {
+		const newTask = {
+			id: this.tasks.length ? this.tasks[this.tasks.length - 1].id + 1 : 1,
+			title,
+			isDone: false
+		};
+		this.tasks.push(newTask);
+	},
+
+	toggleTaskStatus(id) {
+		this.tasks = this.tasks.map(task => {
+			// if (task.id === id) {
+			// 	return { ...task, isDone: !task.isDone };
+			// } else {
+			// 	return task;
+			// }
+			return task.id === id ? { ...task, isDone: !task.isDone } : task;
+		})
 	}
+
 };
-
-
-
 // View
 const view = {
 
 	list: document.querySelector('.list'),
+	addForm: document.querySelector('.add-form'),
+	input: document.querySelector('.add-form input'),
 
 	renderTasks(tasks) {
 
@@ -40,9 +60,16 @@ const view = {
 				controller.handleDeleteTask(idToDelete);
 			});
 
+			// li.addEventListener('click', () => {
+			// 	controller.handleToggleTask(task.id);
+			// });
+
+
+
 			if (task.isDone) {
 				li.classList.add('done');
 			}
+
 			li.append(titleElement, deleteButton);
 			this.list.append(li);
 		}
@@ -54,10 +81,30 @@ const view = {
 const controller = {
 	init() {
 		view.renderTasks(model.tasks);
+		view.addForm.addEventListener('submit', (event) => {
+			event.preventDefault();
+			const newTitle = view.input.value.trim();
+			if (newTitle) {
+				controller.handleAddTask(newTitle);
+			}
+
+		});
+
 	},
 
 	handleDeleteTask(id) {
 		model.deleteTask(id);
+		view.renderTasks(model.tasks);
+	},
+
+	handleAddTask(title) {
+		model.addTask(title);
+		view.input.value = '';
+		view.renderTasks(model.tasks);
+	},
+
+	handleToggleTask(id) {
+		model.toggleTaskStatus(id);
 		view.renderTasks(model.tasks);
 	}
 
