@@ -56,13 +56,6 @@ const view = {
 			deleteButton.className = 'delete-button';
 			deleteButton.textContent = 'Удалить';
 
-			deleteButton.addEventListener('click', (event) => {
-				const li = event.target.closest('li');
-				const idToDelete = Number(li.dataset.id);
-				controller.handleDeleteTask(idToDelete);
-			});
-
-
 			if (task.isDone) {
 				li.classList.add('done');
 			}
@@ -87,8 +80,20 @@ const controller = {
 
 		});
 		view.list.addEventListener('click', (event) => {
+			const target = event.target
+			if (target.classList.contains('delete-button')) {
+				const li = event.target.closest('li');
+				const idToDelete = Number(li.dataset.id);
+				controller.handleDeleteTask(idToDelete);
+
+			} else if (target.closest('.task-item')) {
+				const li = event.target.closest('li');
+				const idToToggle = Number(li.dataset.id);
+				controller.handleToggleTask(idToToggle);
+			}
 
 		});
+
 
 	},
 
