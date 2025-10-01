@@ -29,8 +29,11 @@ body {
 }
 
 .list li.done {
-    text-decoration: line-through;
     color: #aaa;
+}
+
+.list li.done .task-title {
+    text-decoration: line-through;
 }
 
 .add-form {
