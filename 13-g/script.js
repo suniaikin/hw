@@ -50,6 +50,7 @@ const view = {
 
 			const titleElement = document.createElement('span');
 			titleElement.textContent = task.title;
+			titleElement.className = 'task-title';
 
 			const deleteButton = document.createElement('button');
 			deleteButton.textContent = 'Удалить';

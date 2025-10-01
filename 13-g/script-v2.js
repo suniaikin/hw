@@ -37,7 +37,6 @@ const view = {
 	list: document.querySelector('.list'),
 	addForm: document.querySelector('.add-form'),
 	input: document.querySelector('.add-form input'),
-	deleteButton: document.querySelectorAll('button'),
 
 	renderTasks(tasks) {
 
@@ -46,7 +45,7 @@ const view = {
 		for (const task of tasks) {
 
 			const li = document.createElement('li');
-
+			li.className = 'task-item'
 			li.dataset.id = task.id;
 
 			const titleElement = document.createElement('span');
@@ -54,12 +53,15 @@ const view = {
 			titleElement.className = 'task-title';
 
 			const deleteButton = document.createElement('button');
+			deleteButton.className = 'delete-button';
 			deleteButton.textContent = 'Удалить';
 
-
-			li.addEventListener('click', () => {
-				controller.handleToggleTask(task.id);
+			deleteButton.addEventListener('click', (event) => {
+				const li = event.target.closest('li');
+				const idToDelete = Number(li.dataset.id);
+				controller.handleDeleteTask(idToDelete);
 			});
+
 
 			if (task.isDone) {
 				li.classList.add('done');
@@ -82,34 +84,31 @@ const controller = {
 			if (newTitle) {
 				controller.handleAddTask(newTitle);
 			}
+
 		});
-		view.deleteButton.forEach(button => {
-			button.addEventListener('click', (event) => {
-				const li = event.target.closest('li');
-				const idToDelete = Number(li.dataset.id);
-				controller.handleDeleteTask(idToDelete);
-			});
+		view.list.addEventListener('click', (event) => {
 
+		});
 
-		},
+	},
 
-			handleDeleteTask(id) {
-			model.deleteTask(id);
-			view.renderTasks(model.tasks);
-		},
+	handleDeleteTask(id) {
+		model.deleteTask(id);
+		view.renderTasks(model.tasks);
+	},
 
-			handleAddTask(title) {
-			model.addTask(title);
-			view.input.value = '';
-			view.renderTasks(model.tasks);
-		},
+	handleAddTask(title) {
+		model.addTask(title);
+		view.input.value = '';
+		view.renderTasks(model.tasks);
+	},
 
-			handleToggleTask(id) {
-			model.toggleTaskStatus(id);
-			view.renderTasks(model.tasks);
-		}
+	handleToggleTask(id) {
+		model.toggleTaskStatus(id);
+		view.renderTasks(model.tasks);
+	}
 
 
 };
 
-	controller.init();
+controller.init();
