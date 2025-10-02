@@ -28,3 +28,8 @@ body {
     font-size: 13px;
     margin-left: 5px;
 }
+
+li {
+    list-style: none;
+    /* Убирает стандартные маркеры списка */
+}

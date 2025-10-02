@@ -13,7 +13,8 @@ const model = {
 
 	render() {
 		document.body.innerHTML = '';
-		console.log(this.courseData);
+		const courseDOMElement = courseView(this.courseData);
+		document.body.append(courseDOMElement);
 	},
 
 	createLesson(lessonTitle) {
@@ -22,7 +23,7 @@ const model = {
 			title: lessonTitle,
 			isDone: false
 		};
-		this.courseData.lessons.push(newLesson);
+		this.courseData.lessons.concat(newLesson);
 		this.render();
 	},
 
@@ -45,6 +46,7 @@ const model = {
 
 	deleteLesson(lessonId) {
 		this.courseData.lessons = this.courseData.lessons.filter(lesson => lesson.id !== lessonId);
+		this.courseData.lessons = lessonId;
 		this.render();
 	}
 }
@@ -54,3 +56,37 @@ function init() {
 }
 
 init();
+
+function courseView(data) {
+	const container = document.createElement('div');
+
+	// Заголовок курса
+	const title = document.createElement('h1');
+	title.classList.add('title');
+	title.setAttribute('id', 'course-title');
+	title.textContent = data.title;
+
+	// Список уроков
+	const list = document.createElement('ul');
+	list.classList.add('list');
+
+	data.lessons.forEach(lesson => {
+		const listItem = document.createElement('li');
+		listItem.classList.add('list-item');
+		listItem.setAttribute('data-id', lesson.id);
+		const button = document.createElement('button');
+		button.classList.add('button');
+		button.setAttribute('data-action', 'toggle-status');
+		button.textContent = lesson.isDone ? 'Undo' : 'Done';
+		listItem.appendChild(button);
+		if (lesson.isDone) {
+			listItem.classList.add('done');
+		}
+		listItem.textContent = lesson.title;
+		list.appendChild(listItem);
+	});
+
+	container.append(title, list);
+	return container;
+
+}
