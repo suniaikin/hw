@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .list {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 10px;
+    }
+
+    .item {
+        font-family: Arial, sans-serif;
+        cursor: pointer;
+    }
+
+    .done {
+        font-weight: 600;
+        /* Делает текст более жирным, подчеркивая статус "пройдено" */
+    }
+
+    .done::before {
+        content: "✅";
+        /* Добавляет знак галочки после текста элемента */
+        font-size: 13px;
+        margin-left: 5px;
+    }
+</style>
+
+<body>
+    <div>
+        <h1 id="course-title" class="title">Содержание курса 📚</h1>
+        <ol class="list">
+            <li class="item done">Введение в JavaScript</li>
+            <li class="item">Операторы, сравнение, ветвление</li>
+            <li class="item">Функции</li>
+            <li class="item">Массивы</li>
+            <li class="item">Объекты</li>
+            <li class="item current" id="dom">Взаимодействие с DOM ⬅</li>
+            <li class="item">Типы данных</li>
+            <li class="item">Асинхронное программирование</li>
+            <li class="item">Продвинутая работа с функциями</li>
+            <li class="item">Паттерн MVC</li>
+        </ol>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
