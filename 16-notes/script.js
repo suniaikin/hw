@@ -1,10 +1,23 @@
-// находим главный контейнер с id 'app'
+// данные приложения
+const model = {
+	notes: [
+		{ id: 1, title: 'Flexbox (CSS)', text: 'Lorem ipsum dolor sit amet...', color: '#F8D775', isFavorite: true },
+	],
+}
+
+// находим контейнер для приложения
 const app = document.getElementById('app');
 
-// функция для рендеринга интерфейса
+
+// render function
 function render() {
 	app.innerHTML = ''; // очищаем содержимое контейнера
-	console.log('render'); // логируем рендеринг
+	const notesToRender = model.notes; // получаем заметки из модели
+	const notesContainer =
 
+}
 
+function createNotesContainer(notes) {
+	const container = document.createElement('div');
+	return container;
 }
