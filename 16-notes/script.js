@@ -19,12 +19,11 @@ const model = {
 	]
 }
 
-
-
 // view
 
 const view = {
 	renderNotes() {
-
+		const root = document.getElementById('root'); // обращение к корневому элементу 
+		root.innerHTML = ''; // очистка корневого элемента
 	}
 }
