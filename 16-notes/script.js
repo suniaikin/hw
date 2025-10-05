@@ -10,6 +10,7 @@ const model = {
 		},
 		{
 			id: 2,
+<<<<<<< HEAD
 			title: "Объекты (JavaScript)",
 			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 			color: "#b2e597", // Зеленый
@@ -17,9 +18,19 @@ const model = {
 		},
 	],
 };
+=======
+			title: 'Объекты (JavaScript)',
+			text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+			color: '#b2e597', // Зеленый
+			isFavorite: false
+		}
+	]
+}
+>>>>>>> ae209c85499ee4cb631f3e912472c0057450241d
 
 // view
 const view = {
+<<<<<<< HEAD
 	  createNoteElement(note) {
 		  const newDiv = document.createElement("div");
 		  newDiv.classList.add("note");
@@ -51,3 +62,10 @@ const controller = {
 };
 
 controller.init();
+=======
+	renderNotes() {
+		const root = document.getElementById('root'); // обращение к корневому элементу 
+		root.innerHTML = ''; // очистка корневого элемента
+	}
+}
+>>>>>>> ae209c85499ee4cb631f3e912472c0057450241d
