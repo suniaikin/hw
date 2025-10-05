@@ -23,21 +23,31 @@ const model = {
 
 const view = {
 
+	rootEl: document.getElementById("root"),
 
 
 	// функция для создания элемента заметки
 	createNoteElement(note) {
+
 		const newDiv = document.createElement("div");
 		newDiv.classList.add("note");
 		newDiv.dataset.color = note.color;
-	},
 
+		const titleEl = document.createElement("h3");
+		titleEl.textContent = note.title;
+
+		const textEl = document.createElement("p");
+		textEl.textContent = note.text;
+
+		newDiv.append(titleEl, textEl);
+
+		return newDiv;
+	},
 
 
 	// функция для рендеринга всех заметок
 	renderNotes(notes) {
-		const root = document.getElementById("root");
-		root.innerHTML = "";
+		this.rootEl.innerHTML = "";
 
 		// создаем фрагмент для оптимизации
 		const fragment = document.createDocumentFragment();
@@ -50,7 +60,7 @@ const view = {
 		})
 
 		// добавляем фрагмент в корневой элемент за 1 раз
-		root.appendChild(fragment);
+		this.rootEl.appendChild(fragment);
 
 	},
 
