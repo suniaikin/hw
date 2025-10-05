@@ -10,7 +10,6 @@ const model = {
 		},
 		{
 			id: 2,
-<<<<<<< HEAD
 			title: "Объекты (JavaScript)",
 			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 			color: "#b2e597", // Зеленый
@@ -18,24 +17,15 @@ const model = {
 		},
 	],
 };
-=======
-			title: 'Объекты (JavaScript)',
-			text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-			color: '#b2e597', // Зеленый
-			isFavorite: false
-		}
-	]
-}
->>>>>>> ae209c85499ee4cb631f3e912472c0057450241d
 
 // view
 const view = {
 <<<<<<< HEAD
-	  createNoteElement(note) {
-		  const newDiv = document.createElement("div");
-		  newDiv.classList.add("note");
-		  newDiv.dataset.color = note.color;
-   },
+	createNoteElement(note) {
+		const newDiv = document.createElement("div");
+		newDiv.classList.add("note");
+		newDiv.dataset.color = note.color;
+	},
 
 	renderNotes(notes) {
 		const root = document.getElementById("root");
@@ -43,11 +33,11 @@ const view = {
 
 		//пустой черновик
 		const fragment = document.createDocumentFragment();
-		
+
 		notes.forEach((note) => {
 			const noteElement = this.createNoteElement(note);
 			fragment.appendChild(noteElement);
-			
+
 		})
 
 	},
@@ -62,10 +52,10 @@ const controller = {
 };
 
 controller.init();
-=======
-	renderNotes() {
-		const root = document.getElementById('root'); // обращение к корневому элементу 
-		root.innerHTML = ''; // очистка корневого элемента
-	}
+-=
+renderNotes() {
+	const root = document.getElementById('root'); // обращение к корневому элементу 
+	root.innerHTML = ''; // очистка корневого элемента
+}
 }
 >>>>>>> ae209c85499ee4cb631f3e912472c0057450241d
