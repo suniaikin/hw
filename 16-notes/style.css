@@ -2,3 +2,10 @@ body {
     font-family: sans-serif;
     background-color: #f4f4f4;
 }
+
+.note[data-color="#fcca78"] {
+  background-color: #fcca78;
+}
+.note[data-color="#b2e597"] {
+  background-color: #b2e597;
+}
