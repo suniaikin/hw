@@ -1,4 +1,5 @@
 // model
+
 const model = {
 	notes: [
 		{
@@ -19,8 +20,9 @@ const model = {
 };
 
 // view
+
 const view = {
-<<<<<<< HEAD
+
 	createNoteElement(note) {
 		const newDiv = document.createElement("div");
 		newDiv.classList.add("note");
@@ -41,6 +43,7 @@ const view = {
 		})
 
 	},
+
 };
 
 // controller
@@ -52,10 +55,3 @@ const controller = {
 };
 
 controller.init();
--=
-renderNotes() {
-	const root = document.getElementById('root'); // обращение к корневому элементу 
-	root.innerHTML = ''; // очистка корневого элемента
-}
-}
->>>>>>> ae209c85499ee4cb631f3e912472c0057450241d
