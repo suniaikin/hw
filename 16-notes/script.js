@@ -1,66 +1,96 @@
-// model
+// MODEL
 
+// Константы
+// _цвета заметок
+const NOTE_COLORS = { // цвета заметок
+	YELLOW: "yellow",
+	GREEN: "green",
+	BLUE: "blue",
+	PINK: "pink",
+	VIOLET: "violet",
+}
+
+// Модель данных
 const model = {
 	notes: [
 		{
 			id: 1,
 			title: "Flexbox (CSS)",
 			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-			color: "#fcca78", // Желтый
+			color: NOTE_COLORS.YELLOW,
 			isFavorite: true,
 		},
 		{
 			id: 2,
 			title: "Объекты (JavaScript)",
 			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-			color: "#b2e597", // Зеленый
+			color: NOTE_COLORS.GREEN,
 			isFavorite: false,
 		},
 	],
 };
 
-// view
+// VIEW
 
 const view = {
 
+	// Корневой элемент для рендеринга заметок
 	rootEl: document.getElementById("root"),
 
 
-	// функция для создания элемента заметки
+	// Создание элементов заметки
+	// _функция для создания элемента заметки
 	createNoteElement(note) {
 
-		const newDiv = document.createElement("div");
-		newDiv.classList.add("note");
-		newDiv.dataset.color = note.color;
+		// __html элементы заметки
+		const noteEl = document.createElement("div") // контейнер заметки
+		const titleEl = document.createElement("h3") // заголовок заметки
+		const textEl = document.createElement("p") // текст заметки
+		const controlsEl = document.createElement("div") // контейнер для кнопок
+		const favoriteBtn = document.createElement("button") // кнопка "Избранное"
+		const deleteBtn = document.createElement("button") // кнопка "Удалить"
 
-		const titleEl = document.createElement("h3");
+		// __css классы для стилизации отрисовки заметки
+		noteEl.classList.add("note")
+		noteEl.classList.add(`note--${note.color}`); // класс для цвета заметки, чтобы задавать и менять цвет через CSS
+		controlsEl.classList.add("note-controls");
+		favoriteBtn.classList.add("note-favorite");
+		deleteBtn.classList.add("note-delete");
+
+		// __attributes установка атрибутов
+		noteEl.dataset.id = note.id; // атрибут data-id для управления заметками
+
+		// __content заполнение элементов контентом из объекта заметки
 		titleEl.textContent = note.title;
-
-		const textEl = document.createElement("p");
 		textEl.textContent = note.text;
+		favoriteBtn.textContent = note.isFavorite ? "★" : "☆"; // заполнение кнопки "Избранное" в зависимости от состояния
+		deleteBtn.textContent = "🗑"; // иконка мусорной корзины для кнопки "Удалить"
 
-		newDiv.append(titleEl, textEl);
+		// __append добавление элементов в DOM
+		controlsEl.append(favoriteBtn, deleteBtn);
+		noteEl.append(titleEl, controlsEl, textEl);
 
-		return newDiv;
+		return noteEl;
 	},
 
-
-	// функция для рендеринга всех заметок
+	// Функция для рендеринга всех заметок
 	renderNotes(notes) {
+
+		// _очистка корневого элемента перед рендерингом
 		this.rootEl.innerHTML = "";
 
-		// создаем фрагмент для оптимизации
+		// _фрагмент для временного хранения элементов заметок
 		const fragment = document.createDocumentFragment();
 
-		// перебираем массив заметок и создаем для каждой заметки элемент
+		// _перебор массива заметок
 		notes.forEach((note) => {
 			const noteElement = this.createNoteElement(note);
 			fragment.append(noteElement);
 
 		})
 
-		// добавляем фрагмент в корневой элемент за 1 раз
-		this.rootEl.appendChild(fragment);
+		// _добавление фрагмента с заметками в корневой элемент
+		this.rootEl.append(fragment);
 
 	},
 

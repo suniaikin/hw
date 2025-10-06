@@ -3,9 +3,16 @@ body {
     background-color: #f4f4f4;
 }
 
-.note[data-color="#fcca78"] {
-  background-color: #fcca78;
+.note {
+    border-top: 5px solid transparent;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: white;
 }
-.note[data-color="#b2e597"] {
-  background-color: #b2e597;
+
+.note--yellow {
+    border-top-color: #fcca78;
+}
+.note--green {
+    border-top-color: #b2e597;
 }
