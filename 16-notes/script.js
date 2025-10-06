@@ -28,6 +28,10 @@ const model = {
 			isFavorite: false,
 		},
 	],
+
+	deleteNote(id) {
+		this.notes = this.notes.filter(note => note.id !== id);
+	},
 };
 
 // VIEW
@@ -96,12 +100,39 @@ const view = {
 
 };
 
-// controller
+// CONTROLLER
 
 const controller = {
+	// Инициализация приложения
 	init() {
 		view.renderNotes(model.notes);
+		this.setupEventListeners();
+	},
+
+	// Прослушка событий
+	setupEventListeners() {
+		view.rootEl.addEventListener("click", (event) => {
+			const target = event.target
+			const noteEl = event.target.closest(".note");
+			if (!noteEl) return;
+			if (target.closest(".note-delete")) {
+				const idToDelete = noteEl.dataset.id;
+				console.log("Нужно удалить заметку с ID:", idToDelete);
+			}
+
+		})
 	},
 };
 
+
+
+
+
+
+
+
+
+
+
+// Инициализация приложения
 controller.init();
