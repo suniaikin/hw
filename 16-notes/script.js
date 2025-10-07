@@ -47,28 +47,28 @@ const view = {
 	createNoteElement(note) {
 
 		// __html элементы заметки
-		const noteEl = document.createElement("div") // контейнер заметки
-		const titleEl = document.createElement("h3") // заголовок заметки
-		const textEl = document.createElement("p") // текст заметки
-		const controlsEl = document.createElement("div") // контейнер для кнопок
-		const favoriteBtn = document.createElement("button") // кнопка "Избранное"
-		const deleteBtn = document.createElement("button") // кнопка "Удалить"
+		const noteEl = document.createElement("div")
+		const titleEl = document.createElement("h3")
+		const textEl = document.createElement("p")
+		const controlsEl = document.createElement("div")
+		const favoriteBtn = document.createElement("button")
+		const deleteBtn = document.createElement("button")
 
-		// __css классы для стилизации отрисовки заметки
+		// __css классы для стилизации отрисовки
 		noteEl.classList.add("note")
-		noteEl.classList.add(`note--${note.color}`); // класс для цвета заметки, чтобы задавать и менять цвет через CSS
+		noteEl.classList.add(`note--${note.color}`);
 		controlsEl.classList.add("note-controls");
 		favoriteBtn.classList.add("note-favorite");
 		deleteBtn.classList.add("note-delete");
 
 		// __attributes установка атрибутов
-		noteEl.dataset.id = note.id; // атрибут data-id для управления заметками
+		noteEl.dataset.id = note.id;
 
 		// __content заполнение элементов контентом из объекта заметки
 		titleEl.textContent = note.title;
 		textEl.textContent = note.text;
-		favoriteBtn.textContent = note.isFavorite ? "★" : "☆"; // заполнение кнопки "Избранное" в зависимости от состояния
-		deleteBtn.textContent = "🗑"; // иконка мусорной корзины для кнопки "Удалить"
+		favoriteBtn.textContent = note.isFavorite ? "★" : "☆";
+		deleteBtn.textContent = "🗑";
 
 		// __append добавление элементов в DOM
 		controlsEl.append(favoriteBtn, deleteBtn);
@@ -111,17 +111,32 @@ const controller = {
 
 	// Прослушка событий
 	setupEventListeners() {
+		// view.rootEl.addEventListener("click", (event) => {
+		// 	const target = event.target
+		// 	const noteEl = event.target.closest(".note");
+		// 	if (!noteEl) return;
+		// 	if (target.closest(".note-delete")) {
+		// 		const idToDelete = noteEl.dataset.id;
+		// 		this.handleDeleteNote(Number(idToDelete));
+		// 	}
+
+		// })
+
 		view.rootEl.addEventListener("click", (event) => {
-			const target = event.target
-			const noteEl = event.target.closest(".note");
-			if (!noteEl) return;
-			if (target.closest(".note-delete")) {
-				const idToDelete = noteEl.dataset.id;
-				console.log("Нужно удалить заметку с ID:", idToDelete);
+			const clickedElement = event.target;
+			if (clickedElement.classList.contains('note-delete')) {
+				console.log('Клик был точно по кнопке удаления!');
+
 			}
+
 
 		})
 	},
+
+	handleDeleteNote(id) {
+		model.deleteNote(id);
+		view.renderNotes(model.notes);
+	}
 };
 
 
