@@ -46,6 +46,13 @@ const view = {
 	// _функция для создания элемента заметки
 	createNoteElement(note) {
 
+
+
+
+
+
+
+
 		// __html элементы заметки
 		const noteEl = document.createElement("div")
 		const titleEl = document.createElement("h3")
@@ -121,15 +128,13 @@ const controller = {
 		// 	}
 
 		// })
-
 		view.rootEl.addEventListener("click", (event) => {
 			const clickedElement = event.target;
 			if (clickedElement.classList.contains('note-delete')) {
-				console.log('Клик был точно по кнопке удаления!');
-
+				const noteElement = clickedElement.closest('.note');
+				const noteId = Number(noteElement.dataset.id);
+				this.handleDeleteNote(noteId);
 			}
-
-
 		})
 	},
 
