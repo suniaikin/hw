@@ -1,6 +1,7 @@
 // MODEL
 
 // Константы
+
 // _цвета заметок
 const NOTE_COLORS = { // цвета заметок
 	YELLOW: "yellow",
@@ -11,6 +12,7 @@ const NOTE_COLORS = { // цвета заметок
 }
 
 // Модель данных
+
 const model = {
 	notes: [
 		{
@@ -39,56 +41,79 @@ const model = {
 const view = {
 
 	// Корневой элемент для рендеринга заметок
-	rootEl: document.getElementById("root"),
-
+	rootElement: document.getElementById("root"),
 
 	// Создание элементов заметки
-	// _функция для создания элемента заметки
 	createNoteElement(note) {
 
+		// базовый контейне
+		const noteElement = document.createElement("div")
+		noteElement.classList.add("noteElement")
+		noteElement.classList.add(`noteElement--${note.color}`);
+		noteElement.dataset.id = note.id;
 
+		// заголовок
+		const titleElement = document.createElement("h3")
+		titleElement.textContent = note.title;
 
+		//текст
+		const textElement = document.createElement("p")
+		textElement.textContent = note.text;
 
+		// кнопочный контейнер 
+		const controlsElement = document.createElement("div")
+		controlsElement.classList.add("noteElement-controls");
 
+		// кнопка Удаления
+		const deleteButton = document.createElement("button")
+		deleteButton.classList.add("noteElement-delete");
+		deleteButton.textContent = "🗑";
 
+		// кнопка в Избранное
+		const favoriteButton = document.createElement("button")
+		favoriteButton.classList.add("noteElement-favorite");
+		favoriteButton.textContent = note.isFavorite ? "★" : "☆";
 
+		// закинуть в DOM
+		noteElement.append(titleElement, controlsElement, textElement);
+		controlsElement.append(favoriteButton, deleteButton);
 
-		// __html элементы заметки
-		const noteEl = document.createElement("div")
-		const titleEl = document.createElement("h3")
-		const textEl = document.createElement("p")
-		const controlsEl = document.createElement("div")
-		const favoriteBtn = document.createElement("button")
-		const deleteBtn = document.createElement("button")
+		// // __html элементы заметки
+		// const noteEl = document.createElement("div")
+		// const titleEl = document.createElement("h3")
+		// const textEl = document.createElement("p")
+		// const controlsEl = document.createElement("div")
+		// const favoriteBtn = document.createElement("button")
+		// const deleteBtn = document.createElement("button")
 
-		// __css классы для стилизации отрисовки
-		noteEl.classList.add("note")
-		noteEl.classList.add(`note--${note.color}`);
-		controlsEl.classList.add("note-controls");
-		favoriteBtn.classList.add("note-favorite");
-		deleteBtn.classList.add("note-delete");
+		// // __css классы для стилизации отрисовки
+		// noteEl.classList.add("note")
+		// noteEl.classList.add(`note--${note.color}`);
+		// controlsEl.classList.add("note-controls");
+		// favoriteBtn.classList.add("note-favorite");
+		// deleteBtn.classList.add("note-delete");
 
-		// __attributes установка атрибутов
-		noteEl.dataset.id = note.id;
+		// // __attributes установка атрибутов
+		// noteEl.dataset.id = note.id;
 
-		// __content заполнение элементов контентом из объекта заметки
-		titleEl.textContent = note.title;
-		textEl.textContent = note.text;
-		favoriteBtn.textContent = note.isFavorite ? "★" : "☆";
-		deleteBtn.textContent = "🗑";
+		// // __content заполнение элементов контентом из объекта заметки
+		// titleEl.textContent = note.title;
+		// textEl.textContent = note.text;
+		// favoriteBtn.textContent = note.isFavorite ? "★" : "☆";
+		// deleteBtn.textContent = "🗑";
 
-		// __append добавление элементов в DOM
-		controlsEl.append(favoriteBtn, deleteBtn);
-		noteEl.append(titleEl, controlsEl, textEl);
+		// // __append добавление элементов в DOM
+		// controlsEl.append(favoriteBtn, deleteBtn);
+		// noteEl.append(titleEl, controlsEl, textEl);
 
-		return noteEl;
+		return noteElement;
 	},
 
 	// Функция для рендеринга всех заметок
 	renderNotes(notes) {
 
 		// _очистка корневого элемента перед рендерингом
-		this.rootEl.innerHTML = "";
+		this.rootElement.innerHTML = "";
 
 		// _фрагмент для временного хранения элементов заметок
 		const fragment = document.createDocumentFragment();
@@ -101,7 +126,7 @@ const view = {
 		})
 
 		// _добавление фрагмента с заметками в корневой элемент
-		this.rootEl.append(fragment);
+		this.rootElement.append(fragment);
 
 	},
 
@@ -128,12 +153,12 @@ const controller = {
 		// 	}
 
 		// })
-		view.rootEl.addEventListener("click", (event) => {
+		view.rootElement.addEventListener("click", (event) => {
 			const clickedElement = event.target;
-			if (clickedElement.classList.contains('note-delete')) {
-				const noteElement = clickedElement.closest('.note');
-				const noteId = Number(noteElement.dataset.id);
-				this.handleDeleteNote(noteId);
+			if (clickedElement.classList.contains('noteElement-delete')) {
+				const parentNoteElement = clickedElement.closest('.noteElement');
+				const targetedNoteElementId = Number(parentNoteElement.dataset.id);
+				this.handleDeleteNote(targetedNoteElementId);
 			}
 		})
 	},
