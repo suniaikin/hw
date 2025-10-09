@@ -66,3 +66,10 @@ img.addEventListener("dbclick", () => {
 	img.remove();
 });
 
+
+function createTitle(): void {
+	const title: HTMLHeadingElement = document.createElement("h1");
+	title.classList.add("title");
+	title.setAttribute("id", "course-title");
+	title.textContent = courseData.title;
+}

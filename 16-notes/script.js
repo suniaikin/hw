@@ -78,34 +78,6 @@ const view = {
 		noteElement.append(titleElement, controlsElement, textElement);
 		controlsElement.append(favoriteButton, deleteButton);
 
-		// // __html элементы заметки
-		// const noteEl = document.createElement("div")
-		// const titleEl = document.createElement("h3")
-		// const textEl = document.createElement("p")
-		// const controlsEl = document.createElement("div")
-		// const favoriteBtn = document.createElement("button")
-		// const deleteBtn = document.createElement("button")
-
-		// // __css классы для стилизации отрисовки
-		// noteEl.classList.add("note")
-		// noteEl.classList.add(`note--${note.color}`);
-		// controlsEl.classList.add("note-controls");
-		// favoriteBtn.classList.add("note-favorite");
-		// deleteBtn.classList.add("note-delete");
-
-		// // __attributes установка атрибутов
-		// noteEl.dataset.id = note.id;
-
-		// // __content заполнение элементов контентом из объекта заметки
-		// titleEl.textContent = note.title;
-		// textEl.textContent = note.text;
-		// favoriteBtn.textContent = note.isFavorite ? "★" : "☆";
-		// deleteBtn.textContent = "🗑";
-
-		// // __append добавление элементов в DOM
-		// controlsEl.append(favoriteBtn, deleteBtn);
-		// noteEl.append(titleEl, controlsEl, textEl);
-
 		return noteElement;
 	},
 
@@ -143,24 +115,16 @@ const controller = {
 
 	// Прослушка событий
 	setupEventListeners() {
-		// view.rootEl.addEventListener("click", (event) => {
-		// 	const target = event.target
-		// 	const noteEl = event.target.closest(".note");
-		// 	if (!noteEl) return;
-		// 	if (target.closest(".note-delete")) {
-		// 		const idToDelete = noteEl.dataset.id;
-		// 		this.handleDeleteNote(Number(idToDelete));
-		// 	}
 
-		// })
 		view.rootElement.addEventListener("click", (event) => {
 			const clickedElement = event.target;
-			if (clickedElement.classList.contains('noteElement-delete')) {
-				const parentNoteElement = clickedElement.closest('.noteElement');
-				const targetedNoteElementId = Number(parentNoteElement.dataset.id);
-				this.handleDeleteNote(targetedNoteElementId);
+			const noteElement = clickedElement.closest('.noteElement');
+			if (!noteElement) return;
+			if (clickedElement.closest('.noteElement-delete')) {
+				const noteId = Number(noteElement.dataset.id);
+				this.handleDeleteNote(noteId);
 			}
-		})
+		});
 	},
 
 	handleDeleteNote(id) {
