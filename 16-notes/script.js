@@ -43,6 +43,15 @@ const view = {
 	// Корневой элемент для рендеринга заметок
 	rootElement: document.getElementById("root"),
 
+	// Контейнер для формы
+	formContainer: document.getElementById("form-container"),
+
+	// Функция для рендеринга формы
+
+	renderForm() {
+		// тут будем создавать форму
+	},
+
 	// Создание элементов заметки
 	createNoteElement(note) {
 
@@ -128,6 +137,7 @@ const controller = {
 	},
 
 	handleDeleteNote(id) {
+		view.renderForm();
 		model.deleteNote(id);
 		view.renderNotes(model.notes);
 	}
