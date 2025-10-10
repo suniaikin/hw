@@ -46,13 +46,31 @@ const view = {
 	// Контейнер для формы
 	formContainer: document.getElementById("form-container"),
 
-	// Функция для рендеринга формы
+	// Форма для ввода заметки
+	createForm() {
+		const formElement = document.createElement("div");
+		formElement.classList.add("noteForm");
 
-	renderForm() {
-		// тут будем создавать форму
+		const titleInput = document.createElement("input");
+		titleInput.type = "text";
+		titleInput.placeholder = "Напишите название новой заметки...";
+		titleInput.classList.add("noteForm-title");
+
+		const textInput = document.createElement("textarea");
+		textInput.placeholder = "Напишите текст новой заметки...";
+		textInput.classList.add("noteForm-text");
+
+		formElement.append(titleInput, textInput);
+
+		return formElement;
 	},
 
-	// Создание элементов заметки
+	renderForm() {
+		const formElement = this.createForm();
+		this.formContainer.append(formElement);
+	},
+
+	// Отрисовка элементов заметки
 	createNoteElement(note) {
 
 		// базовый контейне
@@ -118,6 +136,7 @@ const view = {
 const controller = {
 	// Инициализация приложения
 	init() {
+		view.renderForm();
 		view.renderNotes(model.notes);
 		this.setupEventListeners();
 	},
@@ -137,7 +156,6 @@ const controller = {
 	},
 
 	handleDeleteNote(id) {
-		view.renderForm();
 		model.deleteNote(id);
 		view.renderNotes(model.notes);
 	}

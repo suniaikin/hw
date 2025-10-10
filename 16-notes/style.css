@@ -16,3 +16,16 @@ body {
 .noteElement--green {
     border-top-color: #b2e597;
 }
+
+.noteForm-title,
+.noteForm-text {
+    display: block;
+    width: 30%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-family: sans-serif;
+}
