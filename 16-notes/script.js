@@ -48,8 +48,8 @@ const view = {
 
 	// Форма для ввода заметки
 	createForm() {
-		const formElement = document.createElement("div");
-		formElement.classList.add("noteForm");
+		const noteForm = document.createElement("div");
+		noteForm.classList.add("noteForm");
 
 		const titleInput = document.createElement("input");
 		titleInput.type = "text";
@@ -60,15 +60,23 @@ const view = {
 		textInput.placeholder = "Напишите текст новой заметки...";
 		textInput.classList.add("noteForm-text");
 
-		formElement.append(titleInput, textInput);
+		noteForm.append(titleInput, textInput);
 
-		return formElement;
+		Object.values(NOTE_COLORS).forEach(color => {
+			const button = document.createElement("button");
+			button.style.backgroundColor = color;
+			noteForm.append(button);
+		})
+
+		return noteForm;
 	},
+
 
 	renderForm() {
-		const formElement = this.createForm();
-		this.formContainer.append(formElement);
+		const formWrapper = this.createForm();
+		this.formContainer.append(formWrapper);
 	},
+
 
 	// Отрисовка элементов заметки
 	createNoteElement(note) {
