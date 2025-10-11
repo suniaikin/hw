@@ -10,13 +10,6 @@ body {
     background: white;
 }
 
-.noteElement--yellow {
-    border-top-color: #fcca78;
-}
-.noteElement--green {
-    border-top-color: #b2e597;
-}
-
 .noteForm-title,
 .noteForm-text {
     display: block;
@@ -28,4 +21,29 @@ body {
     border: 2px solid #ddd;
     border-radius: 5px;
     font-family: sans-serif;
+}
+
+.noteForm-colorButton {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.noteForm-colorButton--yellow {
+    background-color: #fcca78;
+}
+.noteForm-colorButton--green {
+    background-color: #b2e597;
+}
+.noteForm-colorButton--blue {
+    background-color: #5792e9;
+}
+.noteForm-colorButton--pink {
+    background-color: #f58ab5;
+}
+.noteForm-colorButton--violet {
+    background-color: #9853f3;
 }

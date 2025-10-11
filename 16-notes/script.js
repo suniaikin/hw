@@ -64,7 +64,8 @@ const view = {
 
 		Object.values(NOTE_COLORS).forEach(color => {
 			const button = document.createElement("button");
-			button.style.backgroundColor = color;
+			button.classList.add("noteForm-colorButton");
+			button.classList.add(`noteForm-colorButton--${color}`);
 			noteForm.append(button);
 		})
 
@@ -84,7 +85,7 @@ const view = {
 		// базовый контейне
 		const noteElement = document.createElement("div")
 		noteElement.classList.add("noteElement")
-		noteElement.classList.add(`noteElement--${note.color}`);
+		noteElement.classList.add(`noteForm-colorButton--${note.color}`);
 		noteElement.dataset.id = note.id;
 
 		// заголовок
