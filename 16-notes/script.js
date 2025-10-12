@@ -2,7 +2,7 @@
 
 // Константы
 
-// _цвета заметок
+// цвета заметок
 const NOTE_COLORS = { // цвета заметок
 	YELLOW: "yellow",
 	GREEN: "green",
@@ -10,6 +10,25 @@ const NOTE_COLORS = { // цвета заметок
 	PINK: "pink",
 	VIOLET: "violet",
 }
+
+// цвет по умолчанию
+
+const DEFAULT_COLOR = NOTE_COLORS.YELLOW;
+
+
+// текстовые константы
+const TEXT_CONSTANTS = {
+	TITLE_INPUT: "Напишите название новой заметки...",
+	TEXT_INPUT: "Напишите текст новой заметки...",
+};
+
+// иконки
+const ICONS = {
+	DELETE_BUTTON: "❌",
+	FAVORITE_BUTTON: "🌞",
+	UNFAVORITE_BUTTON: "⛅",
+}
+
 
 // Модель данных
 
@@ -53,11 +72,11 @@ const view = {
 
 		const titleInput = document.createElement("input");
 		titleInput.type = "text";
-		titleInput.placeholder = "Напишите название новой заметки...";
+		titleInput.placeholder = TEXT_CONSTANTS.TITLE_INPUT;
 		titleInput.classList.add("noteForm-title");
 
 		const textInput = document.createElement("textarea");
-		textInput.placeholder = "Напишите текст новой заметки...";
+		textInput.placeholder = TEXT_CONSTANTS.TEXT_INPUT;
 		textInput.classList.add("noteForm-text");
 
 		noteForm.append(titleInput, textInput);
@@ -82,7 +101,7 @@ const view = {
 	// Отрисовка элементов заметки
 	createNoteElement(note) {
 
-		// базовый контейне
+		// базовый контейнер заметки
 		const noteElement = document.createElement("div")
 		noteElement.classList.add("noteElement")
 		noteElement.classList.add(`noteForm-colorButton--${note.color}`);
@@ -103,12 +122,12 @@ const view = {
 		// кнопка Удаления
 		const deleteButton = document.createElement("button")
 		deleteButton.classList.add("noteElement-delete");
-		deleteButton.textContent = "🗑";
+		deleteButton.textContent = ICONS.DELETE_BUTTON;
 
 		// кнопка в Избранное
 		const favoriteButton = document.createElement("button")
 		favoriteButton.classList.add("noteElement-favorite");
-		favoriteButton.textContent = note.isFavorite ? "★" : "☆";
+		favoriteButton.textContent = note.isFavorite ? ICONS.FAVORITE_BUTTON : ICONS.UNFAVORITE_BUTTON;
 
 		// закинуть в DOM
 		noteElement.append(titleElement, controlsElement, textElement);
@@ -120,20 +139,19 @@ const view = {
 	// Функция для рендеринга всех заметок
 	renderNotes(notes) {
 
-		// _очистка корневого элемента перед рендерингом
+		// очистка корневого элемента перед рендерингом
 		this.rootElement.innerHTML = "";
 
-		// _фрагмент для временного хранения элементов заметок
+		// фрагмент для временного хранения элементов заметок
 		const fragment = document.createDocumentFragment();
 
-		// _перебор массива заметок
+		// перебор массива заметок
 		notes.forEach((note) => {
 			const noteElement = this.createNoteElement(note);
 			fragment.append(noteElement);
-
 		})
 
-		// _добавление фрагмента с заметками в корневой элемент
+		// добавление фрагмента с заметками в корневой элемент
 		this.rootElement.append(fragment);
 
 	},
