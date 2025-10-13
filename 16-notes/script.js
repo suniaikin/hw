@@ -31,22 +31,7 @@ const ICONS = {
 // Модель данных
 
 const model = {
-	notes: [
-		{
-			id: 1,
-			title: "Flexbox (CSS)",
-			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-			color: NOTE_COLORS.YELLOW,
-			isFavorite: true,
-		},
-		{
-			id: 2,
-			title: "Объекты (JavaScript)",
-			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-			color: NOTE_COLORS.GREEN,
-			isFavorite: false,
-		},
-	],
+	notes: [],
 
 	deleteNote(id) {
 		this.notes = this.notes.filter(note => note.id !== id);
@@ -84,17 +69,16 @@ const view = {
 
 		Object.values(NOTE_COLORS).forEach(color => {
 			const button = document.createElement("button");
-			button.classList.add("noteForm-colorButton");
-			button.classList.add(`noteForm-colorButton--${color}`);
+			button.classList.add("note-color");
+			button.classList.add(`note-color--${color}`);
 			noteForm.append(button);
 
 			button.addEventListener("click", () => {
-				console.log("Выбран цвет:", color);
 				this.selectedColor = color;
-				button.classList.add(`noteForm-colorButton-selected`);
-				noteForm.querySelectorAll(".noteForm-colorButton").forEach(btn => {
+				button.classList.add(`note-color-selected`);
+				noteForm.querySelectorAll(".note-color").forEach(btn => {
 					if (btn !== button) {
-						btn.classList.remove("noteForm-colorButton-selected");
+						btn.classList.remove("note-color-selected");
 					}
 				});
 			})
@@ -105,6 +89,20 @@ const view = {
 		addButton.textContent = TEXT_CONSTANTS.ADD_BUTTON;
 		addButton.classList.add("noteForm-addButton");
 		noteForm.append(addButton);
+
+		addButton.addEventListener("click", () => {
+			const newNote = {
+				id: Date.now(),
+				title: titleInput.value,
+				text: textInput.value,
+				color: this.selectedColor,
+				isFavorite: false
+			};
+			model.notes.push(newNote);
+			this.renderNotes(model.notes);
+			titleInput.value = "";
+			textInput.value = "";
+		});
 
 		return noteForm;
 	},
@@ -122,10 +120,12 @@ const view = {
 		// базовый контейнер заметки
 		const noteElement = document.createElement("div")
 		noteElement.classList.add("noteElement")
+		noteElement.classList.add(`note-color--${note.color}`)
 		noteElement.dataset.id = note.id;
 
 		// заголовок
 		const titleElement = document.createElement("h3")
+		titleElement.classList.add("noteElement-title");
 		titleElement.textContent = note.title;
 
 		//текст
