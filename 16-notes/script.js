@@ -11,15 +11,14 @@ const NOTE_COLORS = { // цвета заметок
 	VIOLET: "violet",
 }
 
-// цвет по умолчанию
-
+// цвет по умолчанию для новых заметок
 const DEFAULT_COLOR = NOTE_COLORS.YELLOW;
-
 
 // текстовые константы
 const TEXT_CONSTANTS = {
 	TITLE_INPUT: "Напишите название новой заметки...",
 	TEXT_INPUT: "Напишите текст новой заметки...",
+	ADD_BUTTON: "Добавить",
 };
 
 // иконки
@@ -28,7 +27,6 @@ const ICONS = {
 	FAVORITE_BUTTON: "🌞",
 	UNFAVORITE_BUTTON: "⛅",
 }
-
 
 // Модель данных
 
@@ -65,6 +63,9 @@ const view = {
 	// Контейнер для формы
 	formContainer: document.getElementById("form-container"),
 
+	// Цвет по умолчанию для новых заметок
+	selectedColor: DEFAULT_COLOR,
+
 	// Форма для ввода заметки
 	createForm() {
 		const noteForm = document.createElement("div");
@@ -86,7 +87,24 @@ const view = {
 			button.classList.add("noteForm-colorButton");
 			button.classList.add(`noteForm-colorButton--${color}`);
 			noteForm.append(button);
+
+			button.addEventListener("click", () => {
+				console.log("Выбран цвет:", color);
+				this.selectedColor = color;
+				button.classList.add(`noteForm-colorButton-selected`);
+				noteForm.querySelectorAll(".noteForm-colorButton").forEach(btn => {
+					if (btn !== button) {
+						btn.classList.remove("noteForm-colorButton-selected");
+					}
+				});
+			})
+
 		})
+
+		const addButton = document.createElement("button");
+		addButton.textContent = TEXT_CONSTANTS.ADD_BUTTON;
+		addButton.classList.add("noteForm-addButton");
+		noteForm.append(addButton);
 
 		return noteForm;
 	},
@@ -104,7 +122,6 @@ const view = {
 		// базовый контейнер заметки
 		const noteElement = document.createElement("div")
 		noteElement.classList.add("noteElement")
-		noteElement.classList.add(`noteForm-colorButton--${note.color}`);
 		noteElement.dataset.id = note.id;
 
 		// заголовок
