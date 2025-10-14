@@ -75,9 +75,13 @@ const view = {
 		const notesCount = document.createElement("div");
 		notesCount.classList.add("appHeader-notesCount");
 		notesCount.textContent = `${TEXT_CONSTANTS.CALCULATOR} ${model.notes.length}`;
-
 		appHeader.append(logo, title, notesCount);
 		return appHeader;
+	},
+
+	updateCounter() {
+		const counter = document.querySelector(".appHeader-notesCount");
+		counter.textContent = `${TEXT_CONSTANTS.CALCULATOR} ${model.notes.length}`
 	},
 
 	// Отрисовка шапки
