@@ -56,3 +56,9 @@ body {
 .note-color-selected {
     border: 3px solid #333;
 }
+
+.appHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

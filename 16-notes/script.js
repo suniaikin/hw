@@ -19,6 +19,8 @@ const TEXT_CONSTANTS = {
 	TITLE_INPUT: "Напишите название новой заметки...",
 	TEXT_INPUT: "Напишите текст новой заметки...",
 	ADD_BUTTON: "Добавить",
+	LOGO_TEXT: "NOTES",
+	CALCULATOR: "Всего заметок: ",
 };
 
 // иконки
@@ -26,6 +28,7 @@ const ICONS = {
 	DELETE_BUTTON: "❌",
 	FAVORITE_BUTTON: "🌞",
 	UNFAVORITE_BUTTON: "⛅",
+	LOGO: "📝"
 }
 
 // Модель данных
@@ -42,14 +45,48 @@ const model = {
 
 const view = {
 
-	// Корневой элемент для рендеринга заметок
-	rootElement: document.getElementById("root"),
+
+	//Контенер для шапки
+	headerContainer: document.getElementById("header-container"),
 
 	// Контейнер для формы
 	formContainer: document.getElementById("form-container"),
 
+	// Корневой элемент для рендеринга заметок
+	rootElement: document.getElementById("notes-container"),
+
 	// Цвет по умолчанию для новых заметок
 	selectedColor: DEFAULT_COLOR,
+
+
+	//Oтрисовка шапки
+	createHeader() {
+		const appHeader = document.createElement("div");
+		appHeader.classList.add("appHeader");
+
+		const logo = document.createElement("div");
+		logo.classList.add("appHeader-logo");
+		logo.textContent = ICONS.LOGO;
+
+		const title = document.createElement("h1");
+		title.classList.add("appHeader-title");
+		title.textContent = TEXT_CONSTANTS.LOGO_TEXT;
+
+		const notesCount = document.createElement("div");
+		notesCount.classList.add("appHeader-notesCount");
+		notesCount.textContent = `${TEXT_CONSTANTS.CALCULATOR} ${model.notes.length}`;
+
+		appHeader.append(logo, title, notesCount);
+		return appHeader;
+	},
+
+	// Отрисовка шапки
+	renderHeader() {
+		const headerRender = this.createHeader();
+		this.headerContainer.append(headerRender);
+	},
+
+
 
 	// Форма для ввода заметки
 	createForm() {
@@ -109,8 +146,8 @@ const view = {
 
 
 	renderForm() {
-		const formWrapper = this.createForm();
-		this.formContainer.append(formWrapper);
+		const formRender = this.createForm();
+		this.formContainer.append(formRender);
 	},
 
 
@@ -180,6 +217,7 @@ const view = {
 const controller = {
 	// Инициализация приложения
 	init() {
+		view.renderHeader()
 		view.renderForm();
 		view.renderNotes(model.notes);
 		this.setupEventListeners();
@@ -196,13 +234,26 @@ const controller = {
 				const noteId = Number(noteElement.dataset.id);
 				this.handleDeleteNote(noteId);
 			}
+			if (clickedElement.closest('.noteElement-favorite')) {
+				const noteId = Number(noteElement.dataset.id);
+				this.handleFavoriteNote(noteId);
+			}
 		});
 	},
 
 	handleDeleteNote(id) {
 		model.deleteNote(id);
 		view.renderNotes(model.notes);
-	}
+	},
+
+	handleFavoriteNote(id) {
+		const note = model.notes.find(note => note.id === id);
+		if (note) {
+			note.isFavorite = !note.isFavorite;
+			view.renderNotes(model.notes);
+		}
+	},
+
 };
 
 
