@@ -2,11 +2,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: aliceblue;
 }
 
 body {
     font-family: sans-serif;
-    background-color: #f4f4f4;
+    background-color: #141414;
 }
 
 .noteElement {
@@ -61,4 +62,13 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.noteForm-title {
+    background-color: #190335;
+    color: #5792e9;
+}
+
+.noteForm-text {
+    background-color: #190335;
 }

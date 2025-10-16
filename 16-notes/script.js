@@ -1,5 +1,3 @@
-// MODEL
-
 // Константы
 
 // цвета заметок
@@ -31,7 +29,7 @@ const ICONS = {
 	LOGO: "📝"
 }
 
-// Модель данных
+// MODEL
 
 const model = {
 	notes: [],
@@ -45,7 +43,6 @@ const model = {
 
 const view = {
 
-
 	//Контенер для шапки
 	headerContainer: document.getElementById("header-container"),
 
@@ -53,7 +50,7 @@ const view = {
 	formContainer: document.getElementById("form-container"),
 
 	// Корневой элемент для рендеринга заметок
-	rootElement: document.getElementById("notes-container"),
+	notesСontainer: document.getElementById("notes-container"),
 
 	// Цвет по умолчанию для новых заметок
 	selectedColor: DEFAULT_COLOR,
@@ -89,8 +86,6 @@ const view = {
 		const headerRender = this.createHeader();
 		this.headerContainer.append(headerRender);
 	},
-
-
 
 	// Форма для ввода заметки
 	createForm() {
@@ -143,6 +138,8 @@ const view = {
 			this.renderNotes(model.notes);
 			titleInput.value = "";
 			textInput.value = "";
+			this.updateCounter()
+
 		});
 
 		return noteForm;
@@ -162,7 +159,7 @@ const view = {
 		const noteElement = document.createElement("div")
 		noteElement.classList.add("noteElement")
 		noteElement.classList.add(`note-color--${note.color}`)
-		noteElement.dataset.id = note.id;
+		noteElement.setAttribute("data-id", note.id)
 
 		// заголовок
 		const titleElement = document.createElement("h3")
@@ -198,7 +195,7 @@ const view = {
 	renderNotes(notes) {
 
 		// очистка корневого элемента перед рендерингом
-		this.rootElement.innerHTML = "";
+		this.notesСontainer.innerHTML = "";
 
 		// фрагмент для временного хранения элементов заметок
 		const fragment = document.createDocumentFragment();
@@ -210,9 +207,16 @@ const view = {
 		})
 
 		// добавление фрагмента с заметками в корневой элемент
-		this.rootElement.append(fragment);
+		this.notesСontainer.append(fragment);
 
 	},
+
+	removeNoteElement(id) {
+		const element = document.querySelector(`[data-id="${id}"]`);
+		if (element !== null) {
+			element.remove()
+		}
+	}
 
 };
 
@@ -230,7 +234,7 @@ const controller = {
 	// Прослушка событий
 	setupEventListeners() {
 
-		view.rootElement.addEventListener("click", (event) => {
+		view.notesСontainer.addEventListener("click", (event) => {
 			const clickedElement = event.target;
 			const noteElement = clickedElement.closest('.noteElement');
 			if (!noteElement) return;
@@ -247,7 +251,8 @@ const controller = {
 
 	handleDeleteNote(id) {
 		model.deleteNote(id);
-		view.renderNotes(model.notes);
+		view.removeNoteElement(id)
+		view.updateCounter()
 	},
 
 	handleFavoriteNote(id) {
