@@ -31,6 +31,11 @@ const model = {
 	deleteTask(taskId) {
 		this.tasks = this.tasks.filter((task) => task.id !== taskId)
 		view.renderTasks(this.tasks)
+	},
+
+	deleteDoneTask() {
+		this.tasks = this.tasks.filter((task) => task.isDone !== true)
+		view.renderTasks(this.tasks)
 	}
 }
 
@@ -42,6 +47,7 @@ const view = {
 		const form = document.querySelector('.form')
 		const input = document.querySelector('.input')
 		const ul = document.querySelector('.list')
+		const deleteDone = document.querySelector('.clean-button')
 
 		// Добавляем обработчик события на форму
 		form.addEventListener('submit', function (event) {
@@ -51,7 +57,14 @@ const view = {
 			input.value = ''
 		})
 
-		// Обработчик клика по списку задач
+		deleteDone.addEventListener('click', function () {
+			controller.deleteDoneTask()
+		}
+
+
+		)
+
+
 		ul.addEventListener('click', function (event) {
 			if (event.target.classList.contains('task-title')) {
 				const taskId = +event.target.parentElement.id
@@ -78,7 +91,7 @@ const view = {
         <li id="${task.id}" class="${task.isDone ? 'done' : ''}">
           <b class="task-title">${task.title}</b>
           <button class="delete-button" type="button">Удалить 🗑</button>
-        </li>
+	     </li>
                 `
 			}
 		}
@@ -102,8 +115,14 @@ const controller = {
 
 	deleteTask(taskId) {
 		model.deleteTask(taskId)
+	},
+
+	deleteDoneTask() {
+		model.deleteDoneTask()
 	}
 }
+
+
 
 // Инициализация приложения
 view.init()

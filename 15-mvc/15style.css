@@ -52,8 +52,8 @@ body {
 
 .add-button {
     padding: 15px 30px;
-    background: #019022;
-    color: rgb(4, 242, 99);
+    background: #02ab29;
+    color: rgb(255, 255, 255);
     border: none;
     border-radius: 8px;
     font-size: 16px;
@@ -63,12 +63,12 @@ body {
 }
 
 .add-button:hover {
-    background: #990ac9;
+    background: #007e1e;
 }
 
 .clean-button {
     padding: 15px 30px;
-    background: #f20606;
+    background: #ff0202;
     color: white;
     border: none;
     border-radius: 8px;
@@ -79,7 +79,7 @@ body {
 }
 
 .clean-button:hover {
-    background: #5568d3;
+    background: #d00202;
 }
 
 .list {
@@ -109,6 +109,11 @@ body {
 .list li.done .task-title {
     text-decoration: line-through;
     color: #6c757d;
+}
+
+.delete-button li:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
 }
 
 .task-title {
