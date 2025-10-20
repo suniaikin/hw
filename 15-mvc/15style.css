@@ -10,7 +10,7 @@ body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 20px;
 }
 
@@ -26,7 +26,6 @@ body {
 .title {
     color: #667eea;
     text-align: center;
-    margin-bottom: 30px;
     font-size: 2.5em;
 }
 
@@ -66,16 +65,54 @@ body {
     background: #007e1e;
 }
 
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.counters {
+    display: flex;
+    flex-direction: row;
+    font-size: 0.9em;
+    gap: 0.3em;
+    justify-content: space-between;
+}
+
 .clean-button {
-    padding: 15px 30px;
-    background: #ff0202;
+    padding: 0.2em 0.4em;
+    background: #dc3545;
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
+    border-radius: 5px;
+    font-size: 0.7em;
+    font-weight: 300;
     cursor: pointer;
     transition: background 0.3s;
+}
+
+.counter-tasks,
+.counter-done-tasks,
+.counter-pending-tasks {
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+    background: #f8f9fa;
+    padding: 5px 5px;
+    border-radius: 8px;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.counter-tasks:hover,
+.counter-done-tasks:hover,
+.counter-pending-tasks:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+    cursor: pointer;
 }
 
 .clean-button:hover {

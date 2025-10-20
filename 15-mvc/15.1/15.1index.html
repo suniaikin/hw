@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="15.1style.css" rel="stylesheet" />
+        <title>Todolist MVC</title>
+    </head>
+    <body>
+        <div id="notifications"></div>
+        <div id="app">
+            <header class="headerSet">
+                <h1 class="title">📝Todolist</h1>
+                <div class="counters">
+                    <div class="counters-all">
+                        All tasks
+                        <span class="all-value"></span>
+                        <button type="submit" class="clean-button allCount">
+                            🗑️
+                        </button>
+                    </div>
+                    <div class="counters-done">
+                        Done
+                        <span class="done-value"></span>
+                        <button type="submit" class="clean-button doneCount">
+                            🗑️
+                        </button>
+                    </div>
+                    <div class="counters-pending">
+                        Pending
+                        <span class="pending-value">5</span>
+                        <button type="submit" class="clean-button pendingCount">
+                            🗑️
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <form class="form" name="todolist">
+                <input
+                    type="text"
+                    class="input"
+                    placeholder="Input a task title"
+                    name="task"
+                />
+                <button type="submit" class="add-button">Add task</button>
+            </form>
+            <div class="list"></div>
+            <span class="waiting"></span>
+        </div>
+        <script src="15.1script.js"></script>
+    </body>
+</html>

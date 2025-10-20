@@ -1,10 +1,9 @@
-// Начальные данные
+
 const MOCK_TASKS = [
-	{ id: 1, title: 'Изучить паттерн MVC', isDone: false },
-	{ id: 2, title: 'Подготовить моковые данные', isDone: true }
+	{ id: 1, title: 'Learn MVC Pattern', isDone: false },
+	{ id: 2, title: 'Prepare mocking data', isDone: true }
 ]
 
-// Хранение данных, бизнес-логика
 const model = {
 	tasks: MOCK_TASKS,
 
@@ -39,7 +38,6 @@ const model = {
 	}
 }
 
-// Отображение данных: рендер списка задач, размещение обработчиков событий
 const view = {
 	init() {
 		this.renderTasks(model.tasks)
@@ -49,7 +47,6 @@ const view = {
 		const ul = document.querySelector('.list')
 		const deleteDone = document.querySelector('.clean-button')
 
-		// Добавляем обработчик события на форму
 		form.addEventListener('submit', function (event) {
 			event.preventDefault()
 			const title = input.value
@@ -82,7 +79,7 @@ const view = {
 		let tasksHTML = ''
 
 		if (tasks.length === 0) {
-			tasksHTML = '<div class="empty-state">Нет задач. Добавьте новую!</div>'
+			tasksHTML = '<div class="empty-state">No task. Add a new one!</div>'
 		} else {
 			for (let i = 0; i < tasks.length; i++) {
 				const task = tasks[i]
@@ -90,7 +87,7 @@ const view = {
 				tasksHTML += `
         <li id="${task.id}" class="${task.isDone ? 'done' : ''}">
           <b class="task-title">${task.title}</b>
-          <button class="delete-button" type="button">Удалить 🗑</button>
+          <button class="delete-button" type="button">Delete 🗑</button>
 	     </li>
                 `
 			}
@@ -101,7 +98,6 @@ const view = {
 	}
 }
 
-// Обработка действий пользователя, обновление модели
 const controller = {
 	addTask(title) {
 		if (title && title.trim() !== '') {
@@ -123,6 +119,4 @@ const controller = {
 }
 
 
-
-// Инициализация приложения
 view.init()

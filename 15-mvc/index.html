@@ -4,27 +4,48 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="15style.css" rel="stylesheet" />
-        <title>Todo List MVC</title>
+        <title>Todolist MVC</title>
     </head>
     <body>
         <div id="app">
-            <h1 class="title">Todolist 📝</h1>
+            <header>
+                <h1 class="title">Todolist 📝</h1>
+                <div class="counters">
+                    <div class="counter-tasks">
+                        all tasks:
+                        <span data-all-tasks>3</span>
+                        <button type="submit" class="clean-button">
+                            Delete
+                        </button>
+                    </div>
+                    <div class="counter-done-tasks">
+                        done:
+                        <span data-done-tasks>4</span>
+                        <button type="submit" class="clean-button">
+                            Delete
+                        </button>
+                    </div>
+                    <div class="counter-pending-tasks">
+                        pending:
+                        <span data-pending-tasks>5</span>
+                        <button type="submit" class="clean-button">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </header>
 
-            <!-- Форма для добавления новых задач -->
             <form class="form" name="todolist">
                 <input
                     type="text"
                     class="input"
-                    placeholder="Введите задачу"
+                    placeholder="Type a task"
                     name="task"
                 />
-                <button type="submit" class="add-button">Добавить</button>
-                <button type="submit" class="clean-button">Удалить</button>
+                <button type="submit" class="add-button">Add</button>
             </form>
 
-            <ul class="list">
-                <!-- Сюда будут добавляться задачи -->
-            </ul>
+            <ul class="list"></ul>
         </div>
         <script src="15script.js"></script>
     </body>

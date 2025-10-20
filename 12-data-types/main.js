@@ -1,5 +1,4 @@
 const model = {
-	// 1. Методы display, deleteLesson и т.д. должны быть внутри объекта model
 	courseData: {
 		title: "Содержание курса",
 		lessons: [
@@ -8,11 +7,10 @@ const model = {
 			{ id: 3, title: "Функции", isDone: false },
 			{ id: 4, title: "Массивы", isDone: false },
 			{ id: 5, title: "Объекты", isDone: false }
-		].map((lesson, index) => ({ ...lesson, originalIndex: index })) // Добавляем исходный индекс для сортировки
+		].map((lesson, index) => ({ ...lesson, originalIndex: index }))
 	},
 
 	display() {
-		// Удаляем старое отображение перед отрисовкой нового
 		document.body.querySelector('.course-container')?.remove();
 		const view = courseView(this.courseData, this);
 		document.body.append(view);
@@ -39,7 +37,6 @@ const model = {
 		this.display();
 	},
 
-	// 2. Улучшена и упрощена логика обновления статуса
 	updateLessonStatus(lessonId) {
 		const lessons = this.courseData.lessons;
 		const lesson = lessons.find(lesson => lesson.id === lessonId);
@@ -48,13 +45,12 @@ const model = {
 			lesson.isDone = !lesson.isDone;
 		}
 
-		// Сортируем массив: сначала невыполненные, потом выполненные.
-		// Внутри каждой группы сохраняем исходный порядок.
+
 		lessons.sort((a, b) => {
 			if (a.isDone !== b.isDone) {
-				return a.isDone - b.isDone; // false (0) будет раньше true (1)
+				return a.isDone - b.isDone;
 			}
-			return a.originalIndex - b.originalIndex; // Сохраняем исходный порядок
+			return a.originalIndex - b.originalIndex;
 		});
 
 		this.display();
@@ -80,7 +76,6 @@ function courseView(data, controller) {
 		const lessonTitle = document.createElement('span');
 		lessonTitle.classList.add('lesson-title');
 		lessonTitle.textContent = lesson.title;
-		// 3. Упрощено добавление класса
 		if (lesson.isDone) {
 			lessonTitle.classList.add('done');
 		}
@@ -88,8 +83,7 @@ function courseView(data, controller) {
 		const doneButton = document.createElement('button');
 		doneButton.classList.add('button', 'done-button');
 		doneButton.dataset.id = lesson.id;
-		doneButton.textContent = lesson.isDone ? '✔' : '_'; // Используем галочку для наглядности
-		// 3. Упрощено добавление класса
+		doneButton.textContent = lesson.isDone ? '✔' : '✔';
 		if (lesson.isDone) {
 			doneButton.classList.add('completed');
 		}
@@ -101,7 +95,7 @@ function courseView(data, controller) {
 		const deleteButton = document.createElement('button');
 		deleteButton.classList.add('button', 'delete-button');
 		deleteButton.dataset.id = lesson.id;
-		deleteButton.textContent = '✖'; // Используем крестик для наглядности
+		deleteButton.textContent = '✖';
 		deleteButton.addEventListener('click', (e) => {
 			const lessonId = Number(e.target.dataset.id);
 			controller.deleteLesson(lessonId);
