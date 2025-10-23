@@ -7,20 +7,26 @@
 body {
     font: 1.1em "Courier New", Courier, monospace;
     font-weight: 600;
-    padding: 20px;
-    color: #222222;
+    color: #040404;
+    background: linear-gradient(180deg, #1a1f3a 0%, #0f1324 100%);
+}
+
+.wrap {
+    max-width: 900px;
+    background-color: rgb(255, 255, 255);
+    margin: 0px auto;
+    height: 100vh;
 }
 
 #app {
     max-width: 600px;
-    margin: 20px auto;
+    margin: 0px auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
     width: 100%;
 }
-
 .title {
     text-align: center;
     font-size: 48px;
@@ -31,7 +37,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin: 40px 0px 24px;
 }
 
 .counters {
@@ -70,7 +76,7 @@ body {
 }
 
 .form {
-    margin: 10px 0px 30px;
+    margin: 10px 0px 10px;
     display: flex;
     gap: 10px;
     justify-content: center;
@@ -112,6 +118,7 @@ body {
 .list {
     list-style-type: none;
     padding: 0;
+    /* margin-top: 20px; */
 }
 
 .box {
@@ -135,12 +142,6 @@ body {
     border-radius: 6px;
     gap: 10px;
 }
-
-/* .task:hover {
-    background-color: rgba(74, 0, 123, 0.589);
-    cursor: pointer;
-    color: #ffffff;
-} */
 
 .list-item {
     display: flex;
@@ -205,21 +206,43 @@ body {
 }
 
 #notifications {
-    top: 0px;
+    position: absolute;
+    top: 124px;
     display: flex;
-    align-items: center;
-    flex-direction: column;
-    max-width: 600px;
-    margin: 0 auto;
-    height: 30px;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 10px;
 }
 
 .notification {
     background: #00b006;
+}
+
+.notification-delete {
+    background: #fa5454;
+}
+.notification-done {
+    background: #8317a7;
+}
+.notification-restored {
+    background: #05c2b2;
+}
+
+.notification-delete-all,
+.notification-delete-done,
+.notification-delete-pending {
+    background: #930000;
+}
+
+.notification,
+.notification-delete,
+.notification-done,
+.notification-restored,
+.notification-delete-all,
+.notification-delete-done,
+.notification-delete-pending {
     border: 0px solid #000000;
     color: #ffffff;
     border-radius: 5px;
     padding: 5px 10px;
-    margin: 3px 0px;
-    max-width: 200px;
 }

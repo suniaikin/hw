@@ -31,6 +31,9 @@ const model = {
 		} else {
 			this.tasks.splice(targetIndex, 0, task)
 		}
+		view.renderTasks(this.tasks)
+		view.renderCounts(this.tasks)
+		view.showNotification(NOTIFICATION_TEXT.ADD_MESSAGE)
 	},
 
 	toggleTask(taskId) {
@@ -41,6 +44,15 @@ const model = {
 			return task
 		})
 		this.sortTasks()
+
+		view.renderTasks(this.tasks)
+		view.renderCounts(this.tasks)
+		const changedTask = this.tasks.find(task => task.id === taskId)
+		if (changedTask.isDone) {
+			view.showNotification(NOTIFICATION_TEXT.TASK_DONE)
+		} else {
+			view.showNotification(NOTIFICATION_TEXT.TASK_RESTORED)
+		}
 	},
 
 	sortTasks() {
@@ -54,33 +66,56 @@ const model = {
 
 	deleteTask(taskId) {
 		this.tasks = this.tasks.filter((task) => task.id !== taskId)
+
+		view.renderTasks(this.tasks)
+		view.renderCounts(this.tasks)
+		view.showNotification(NOTIFICATION_TEXT.REMOVE_MESSAGE)
 	},
 
 	deleteDoneTasks() {
 		this.tasks = this.tasks.filter((task) => !task.isDone)
+
+		view.renderTasks(this.tasks)
+		view.renderCounts(this.tasks)
+		view.showNotification(NOTIFICATION_TEXT.DONE_DELETED)
 	},
 
 	deletePendingTasks() {
 		this.tasks = this.tasks.filter((task) => task.isDone)
+
+		view.renderTasks(this.tasks)
+		view.renderCounts(this.tasks)
+		view.showNotification(NOTIFICATION_TEXT.PENDING_DELETED)
 	},
 
 	deleteAllTasks() {
 		this.tasks = []
-	}
+
+		view.renderTasks(this.tasks)
+		view.renderCounts(this.tasks)
+		view.showNotification(NOTIFICATION_TEXT.ALL_DELETED)
+
+	},
+
 }
 
 
 const view = {
 	init() {
+
 		this.allValue = document.querySelector('.all-value')
 		this.doneValue = document.querySelector('.done-value')
 		this.pendingValue = document.querySelector('.pending-value')
 
 		this.ul = document.querySelector('.list')
 
+		this.renderTasks(model.tasks)
+		this.renderCounts(model.tasks)
+
 		const form = document.querySelector('.form')
 		const input = document.querySelector('.input')
 		const counters = document.querySelector('.counters')
+
 
 		form.addEventListener('submit', function (event) {
 			event.preventDefault()
@@ -88,6 +123,8 @@ const view = {
 			controller.addTask(title)
 			input.value = ''
 		})
+
+
 
 		this.ul.addEventListener('click', function (event) {
 			if (event.target.closest('.doneMark, .pendingMark')) {
@@ -113,10 +150,13 @@ const view = {
 			if (event.target.closest('.pendingCount')) {
 				controller.deletePendingTasks()
 			}
+
 		})
+
 	},
 
 	renderCounts(tasks) {
+
 		if (tasks.length === 0) {
 			this.allValue.innerHTML = '0'
 			this.doneValue.innerHTML = '0'
@@ -126,13 +166,17 @@ const view = {
 			this.doneValue.innerHTML = `${tasks.filter((task) => task.isDone).length}`
 			this.pendingValue.innerHTML = `${tasks.filter((task) => !task.isDone).length}`
 		}
+
 	},
 
+
 	renderTasks(tasks) {
+
 		let tasksHTML = ''
 
 		if (tasks.length === 0) {
-			tasksHTML = `<div class="empty-state">${NOTIFICATION_TEXT.NO_TASKS}🚀</div>`
+			tasksHTML = `<div class="empty-state">${NOTIFICATION_TEXT.NO_TASKS}🚀`
+
 		} else {
 			for (let i = 0; i < tasks.length; i++) {
 				const task = tasks[i]
@@ -186,71 +230,37 @@ const view = {
 }
 
 const controller = {
-
-	init() {
-		view.init()
-		view.renderTasks(model.tasks)
-		view.renderCounts(model.tasks)
-	},
-
-	updating: document.querySelector('.updating'),
-
+	waiting: document.querySelector('.waiting'),
 	addTask(title) {
 		if (title && title.trim() !== '') {
-			this.updating.textContent = '✍️Updating...'
+			this.waiting.textContent = '✍️Updating...'
 			setTimeout(() => {
-				this.updating.textContent = ''
+				this.waiting.textContent = ''
 				model.addTask(title)
-				view.renderTasks(model.tasks)
-				view.renderCounts(model.tasks)
-				view.showNotification(NOTIFICATION_TEXT.ADD_MESSAGE)
 			}, 500)
 		}
 	},
 
 	toggleTask(taskId) {
 		model.toggleTask(taskId)
-		view.renderTasks(model.tasks)
-		view.renderCounts(model.tasks)
-		const changedTask = model.tasks.find(task => task.id === taskId)
-		if (changedTask.isDone) {
-			view.showNotification(NOTIFICATION_TEXT.TASK_DONE)
-		} else {
-			view.showNotification(NOTIFICATION_TEXT.TASK_RESTORED)
-		}
 	},
 
 	deleteTask(taskId) {
 		model.deleteTask(taskId)
-
-		view.renderTasks(model.tasks)
-		view.renderCounts(model.tasks)
-		view.showNotification(NOTIFICATION_TEXT.REMOVE_MESSAGE)
-
 	},
+
 	deleteDoneTasks() {
-
-
 		model.deleteDoneTasks()
-		view.renderTasks(model.tasks)
-		view.renderCounts(model.tasks)
-		view.showNotification(NOTIFICATION_TEXT.DONE_DELETED)
 	},
 
 	deleteAllTasks() {
 		model.deleteAllTasks()
-		view.renderTasks(model.tasks)
-		view.renderCounts(model.tasks)
-		view.showNotification(NOTIFICATION_TEXT.ALL_DELETED)
-
 	},
+
 	deletePendingTasks() {
 		model.deletePendingTasks()
-		view.renderTasks(model.tasks)
-		view.renderCounts(model.tasks)
-		view.showNotification(NOTIFICATION_TEXT.PENDING_DELETED)
-
-	}
+	},
 }
 
-controller.init()
+
+view.init()
